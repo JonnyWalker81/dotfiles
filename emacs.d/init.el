@@ -23,7 +23,7 @@
     ("36d92f830c21797ce34896a4cf074ce25dbe0dabe77603876d1b42316530c99d" "b04425cc726711a6c91e8ebc20cf5a3927160681941e06bc7900a5a5bfe1a77f" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
  '(package-selected-packages
    (quote
-    (company-ycmd ycm ycmd relative-line-numbers hlinum nlinum yalinum linum-relative helm helm-ag helm-company helm-flycheck sml-mode moe-theme molokai-theme powerline powerline-evil nav neotree evil-args evil-cleverparens evil-commentary evil-easymotion evil-ediff evil-escape evil-exchange evil-god-state evil-indent-plus evil-jumper evil-leader evil-lisp-state evil-magit evil-matchit evil-mc evil-numbers evil-org evil-quickscope evil-smartparens evil-surround evil-terminal-cursor-changer evil))))
+    (cargo rust-mode company-ycmd ycm ycmd relative-line-numbers hlinum nlinum yalinum linum-relative helm helm-ag helm-company helm-flycheck sml-mode moe-theme molokai-theme powerline powerline-evil nav neotree evil-args evil-cleverparens evil-commentary evil-easymotion evil-ediff evil-escape evil-exchange evil-god-state evil-indent-plus evil-jumper evil-leader evil-lisp-state evil-magit evil-matchit evil-mc evil-numbers evil-org evil-quickscope evil-smartparens evil-surround evil-terminal-cursor-changer evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -55,7 +55,8 @@
 ; (require 'linum-relative)
 ; (linum-relative-global-mode)
 
-
+(autoload 'rust-mode "rust-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 (require 'neotree)
 
 (add-hook 'neotree-mode-hook
