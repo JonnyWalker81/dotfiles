@@ -29,7 +29,7 @@
     ("b571f92c9bfaf4a28cb64ae4b4cdbda95241cd62cf07d942be44dc8f46c491f4" "36d92f830c21797ce34896a4cf074ce25dbe0dabe77603876d1b42316530c99d" "b04425cc726711a6c91e8ebc20cf5a3927160681941e06bc7900a5a5bfe1a77f" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
  '(package-selected-packages
    (quote
-    (flycheck flycheck-clangcheck flycheck-clojure flycheck-color-mode-line flycheck-flow flycheck-gometalinter flycheck-google-cpplint flycheck-irony flycheck-ocaml flycheck-package flycheck-rust flycheck-tip flycheck-typescript-tslint flycheck-ycmd flylisp exec-path-from-shell company-go go-mode cargo rust-mode company-ycmd ycm ycmd relative-line-numbers hlinum nlinum yalinum linum-relative helm helm-ag helm-company helm-flycheck sml-mode moe-theme molokai-theme powerline powerline-evil nav neotree evil-args evil-cleverparens evil-commentary evil-easymotion evil-ediff evil-escape evil-exchange evil-god-state evil-indent-plus evil-jumper evil-leader evil-lisp-state evil-magit evil-matchit evil-mc evil-numbers evil-org evil-quickscope evil-smartparens evil-surround evil-terminal-cursor-changer evil))))
+    (helm-projectile projectile flycheck flycheck-clangcheck flycheck-clojure flycheck-color-mode-line flycheck-flow flycheck-gometalinter flycheck-google-cpplint flycheck-irony flycheck-ocaml flycheck-package flycheck-rust flycheck-tip flycheck-typescript-tslint flycheck-ycmd flylisp exec-path-from-shell company-go go-mode cargo rust-mode company-ycmd ycm ycmd relative-line-numbers hlinum nlinum yalinum linum-relative helm helm-ag helm-company helm-flycheck sml-mode moe-theme molokai-theme powerline powerline-evil nav neotree evil-args evil-cleverparens evil-commentary evil-easymotion evil-ediff evil-escape evil-exchange evil-god-state evil-indent-plus evil-jumper evil-leader evil-lisp-state evil-magit evil-matchit evil-mc evil-numbers evil-org evil-quickscope evil-smartparens evil-surround evil-terminal-cursor-changer evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -83,14 +83,36 @@
  (local-set-key (kbd "M-.") 'godef-jump))
 ; (add-hook 'go-mode-hook 'go-mode-setup)
 
+
 (require 'helm)
 (require 'evil)
 (require 'evil-leader)
 (require 'evil-org)
+(require 'projectile)
+(require 'helm-projectile)
 (evil-leader/set-leader ",")
 (global-evil-leader-mode)
 (evil-mode 1)
 
+    ; (projectile-global-mode)
+    (setq projectile-enable-caching t)
+(setq projectile-globally-ignored-directories (append '("node_modules" ".svn" ".git") projectile-globally-ignored-directories))
+(projectile-mode t)
+
+;; Fix cursor
+(defun my-send-string-to-terminal (string)
+   (unless (display-graphic-p) (send-string-to-terminal string)))
+
+(defun my-evil-terminal-cursor-change ()
+   (when (string= (getenv "TERM_PROGRAM") "iTerm.app")
+        (add-hook 'evil-insert-state-entry-hook (lambda () (my-send-string-to-terminal "\e]50;CursorShape=1\x7")))
+           (add-hook 'evil-insert-state-exit-hook  (lambda () (my-send-string-to-terminal "\e]50;CursorShape=0\x7"))))
+     (when (and (getenv "TMUX") (string= (getenv "TERM_PROGRAM") "iTerm.app"))
+          (add-hook 'evil-insert-state-entry-hook (lambda () (my-send-string-to-terminal "\ePtmux;\e\e]50;CursorShape=1\x7\e\\")))
+              (add-hook 'evil-insert-state-exit-hook  (lambda () (my-send-string-to-terminal "\ePtmux;\e\e]50;CursorShape=0\x7\e\\")))))
+
+  (add-hook 'after-make-frame-functions (lambda (frame) (my-evil-terminal-cursor-change)))
+  (my-evil-terminal-cursor-change)
 ; (require 'yalinum)
 ; (global-yalinum-mode)
 
@@ -121,7 +143,8 @@
 
 (evil-leader/set-key 
     "k" 'neotree-toggle
-    "x" 'helm-M-x)
+    "x" 'helm-M-x
+    "t" 'helm-projectile-find-file)
 
 (require 'powerline)
 (require 'powerline-evil)
