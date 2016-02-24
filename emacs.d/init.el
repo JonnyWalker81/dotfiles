@@ -29,7 +29,7 @@
     ("b571f92c9bfaf4a28cb64ae4b4cdbda95241cd62cf07d942be44dc8f46c491f4" "36d92f830c21797ce34896a4cf074ce25dbe0dabe77603876d1b42316530c99d" "b04425cc726711a6c91e8ebc20cf5a3927160681941e06bc7900a5a5bfe1a77f" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
  '(package-selected-packages
    (quote
-    (evil-paredit evil-space evil-visualstar helm-projectile projectile flycheck flycheck-clangcheck flycheck-clojure flycheck-color-mode-line flycheck-flow flycheck-gometalinter flycheck-google-cpplint flycheck-irony flycheck-ocaml flycheck-package flycheck-rust flycheck-tip flycheck-typescript-tslint flycheck-ycmd flylisp exec-path-from-shell company-go go-mode cargo rust-mode company-ycmd ycm ycmd relative-line-numbers hlinum nlinum yalinum linum-relative helm helm-ag helm-company helm-flycheck sml-mode moe-theme molokai-theme powerline powerline-evil nav neotree evil-args evil-cleverparens evil-commentary evil-easymotion evil-ediff evil-escape evil-exchange evil-god-state evil-indent-plus evil-jumper evil-leader evil-lisp-state evil-magit evil-matchit evil-mc evil-numbers evil-org evil-quickscope evil-smartparens evil-surround evil-terminal-cursor-changer evil))))
+    (elisp-slime-nav evil-paredit evil-space evil-visualstar helm-projectile projectile flycheck flycheck-clangcheck flycheck-clojure flycheck-color-mode-line flycheck-flow flycheck-gometalinter flycheck-google-cpplint flycheck-irony flycheck-ocaml flycheck-package flycheck-rust flycheck-tip flycheck-typescript-tslint flycheck-ycmd flylisp exec-path-from-shell company-go go-mode cargo rust-mode company-ycmd ycm ycmd relative-line-numbers hlinum nlinum yalinum linum-relative helm helm-ag helm-company helm-flycheck sml-mode moe-theme molokai-theme powerline powerline-evil nav neotree evil-args evil-cleverparens evil-commentary evil-easymotion evil-ediff evil-escape evil-exchange evil-god-state evil-indent-plus evil-jumper evil-leader evil-lisp-state evil-magit evil-matchit evil-mc evil-numbers evil-org evil-quickscope evil-smartparens evil-surround evil-terminal-cursor-changer evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -85,11 +85,11 @@
 
 
 (require 'helm)
+(require 'projectile)
+(require 'helm-projectile)
 (require 'evil)
 (require 'evil-leader)
 (require 'evil-org)
-(require 'projectile)
-(require 'helm-projectile)
 (evil-leader/set-leader ",")
 (global-evil-leader-mode)
 (evil-mode 1)
@@ -101,6 +101,21 @@
     (setq projectile-enable-caching t)
 (setq projectile-globally-ignored-directories (append '("node_modules" ".svn" ".git") projectile-globally-ignored-directories))
 (projectile-mode t)
+
+(define-key evil-normal-state-map (kbd "C-h") 'evil-window-left) 
+(define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+(define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+(define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+
+(require 'elisp-slime-nav)
+
+(defun my-lisp-hook ()
+  (elisp-slime-nav-mode)
+  (turn-on-eldoc-mode)
+  )
+
+(add-hook 'emacs-lisp-mode-hook 'my-lisp-hook)
+
 
 ;; Fix cursor
 (defun my-send-string-to-terminal (string)
@@ -154,9 +169,10 @@
 (require 'powerline-evil)
 (require 'moe-theme)
 (require 'molokai-theme)
-(setq moe-theme-mode-line-color 'yellow)
+(setq moe-theme-mode-line-color 'w/b)
 ;; (setq moe-theme-highlight-buffer-id nil)
 ; (setq molokai-theme-mode-line-color 'blue)
+(moe-dark)
 (powerline-moe-theme)
 ; (add-hook 'after-init-hook (lambda () (load-theme 'molokai)))
 ; (powerline-evil-vim-color-theme)
