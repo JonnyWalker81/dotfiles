@@ -14,5 +14,5 @@ func main() {
 	}
 
 	err = cmd.Wait()
-	fmt.Println("Result: ", err)
+	fmt.Println("Result: ", err.Error())
 }
