@@ -42,18 +42,18 @@
 
 (add-hook 'emacs-lisp-mode-hook 'my-setup-elisp-mode)
 
-(defun my-electric-lisp-comment ()
-    "Autocomment things for lisp."
-  (interactive)
-  ;; we can get away with autocommenting on empty lines.
-  ;; not so much on regular ones - that's more likely to be a mistake.
-  (if (my-is-this-line-empty)
-      (insert ";; ")
-    (insert ";")))
+;; (defun my-electric-lisp-comment ()
+;;     "Autocomment things for lisp."
+;;   (interactive)
+;;   ;; we can get away with autocommenting on empty lines.
+;;   ;; not so much on regular ones - that's more likely to be a mistake.
+;;   (if (my-is-this-line-empty)
+;;       (insert ";; ")
+;;     (insert ";")))
 
-(after 'evil
-  (evil-define-key 'insert emacs-lisp-mode-map ";" 'my-electric-lisp-comment)
-  (evil-define-key 'normal emacs-lisp-mode-map "\C-c\C-c" 'eval-defun))
+;; (after 'evil
+;;   (evil-define-key 'insert emacs-lisp-mode-map ";" 'my-electric-lisp-comment)
+;;   (evil-define-key 'normal emacs-lisp-mode-map "\C-c\C-c" 'eval-defun))
 
 (provide 'init-elisp)
 

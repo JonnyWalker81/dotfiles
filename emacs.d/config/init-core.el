@@ -6,6 +6,7 @@
 (setq inhibit-startup-screen t)
 (setq split-width-threshold most-positive-fixnum)
 (setq compilation-read-command nil)
+(define-key global-map (kbd "RET") 'newline-and-indent)
 
 ;; from <https://github.com/bling/dotemacs/>
 (defmacro after (feature &rest body)
