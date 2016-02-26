@@ -18,6 +18,7 @@
     ;; 	(sp-local-pair 'go-mode "{" nil :post-handlers '(:add my-open-block-c-mode))
 
 	(sp-local-pair 'go-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
+	(sp-local-pair 'rust-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
 
 	(defun my-create-newline-and-enter-sexp (&rest _ignored)
 	  "Open a new brace or bracket expression, with relevant newlines and indent. "
