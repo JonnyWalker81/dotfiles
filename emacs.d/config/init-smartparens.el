@@ -4,7 +4,9 @@
   :ensure smartparens
   :config
   (progn
+    (require 'smartparens-config)
     (smartparens-global-mode)
+    
     ;; (defun my-open-block-c-mode (id action context)
     ;;   (when (eq action 'insert)
     ;; 	(newline)

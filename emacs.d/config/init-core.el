@@ -8,6 +8,9 @@
 (setq compilation-read-command nil)
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
+(global-set-key (kbd "TAB") #'company-indent-or-complete-common)
+(setq company-tooltip-align-annotations t)
+
 ;; from <https://github.com/bling/dotemacs/>
 (defmacro after (feature &rest body)
   "After FEATURE is loaded, evaluate BODY."
