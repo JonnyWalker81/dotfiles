@@ -4,6 +4,9 @@
 (global-relative-line-numbers-mode)
 
 (setq inhibit-startup-screen t)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(menu-bar-mode -1)
 (setq split-width-threshold most-positive-fixnum)
 (setq compilation-read-command nil)
 (define-key global-map (kbd "RET") 'newline-and-indent)

@@ -35,6 +35,7 @@
 (require 'init-smartparens)
 
 (require 'init-powerline)
+(require 'init-spaceline)
 
 (provide 'init)
 
