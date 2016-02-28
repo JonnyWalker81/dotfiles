@@ -6,6 +6,7 @@
   (progn
     (require 'smartparens-config)
     (smartparens-global-mode)
+    (turn-on-show-smartparens-mode)
     
     ;; (defun my-open-block-c-mode (id action context)
     ;;   (when (eq action 'insert)

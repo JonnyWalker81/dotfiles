@@ -54,6 +54,8 @@
     (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 
+    (add-to-list 'evil-emacs-state-modes 'cider-mode)
+    (add-to-list 'evil-emacs-state-modes 'eshell-mode)
     
     ;; Fix cursor
     (defun my-send-string-to-terminal (string)
