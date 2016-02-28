@@ -3,9 +3,8 @@
 (require 'relative-line-numbers)
 (global-relative-line-numbers-mode)
 
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-(setq exec-path (append exec-path '("/usr/local/bin")))
-
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+; (toggle-full-screen)
 (setq inhibit-startup-screen t)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
