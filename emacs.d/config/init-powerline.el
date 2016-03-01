@@ -7,11 +7,15 @@
     (use-package powerline-evil
       :ensure powerline-evil)
 
+    	    (setq powerline-default-separator 'wave)
     (use-package moe-theme
       :ensure moe-theme
       :config
       (progn
 	;; (setq moe-theme-mode-line-color 'w/b)
+	;; bad hack :( ... see https://github.com/milkypostman/powerline/issues/54
+
+	(custom-set-variables '(ns-use-srgb-colorspace nil))
 	(moe-dark)))
     ;; 		      (powerline-moe-theme)))
 

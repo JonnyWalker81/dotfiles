@@ -1,5 +1,7 @@
 ;;; Code:
 ;; Core Miscellaneous config
+(set-face-attribute 'default nil
+                :family "Source Code Pro for Powerline" :height 145 :weight 'regular)
 (require 'relative-line-numbers)
 (global-relative-line-numbers-mode)
 
