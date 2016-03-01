@@ -1,2 +1,4 @@
 emacs.d/elpa
 emacs.d/auto-save-list
+*l~
+*.DS_Store
