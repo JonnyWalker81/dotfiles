@@ -1,9 +1,13 @@
 ;;; Code:
 ;; Core Miscellaneous config
 (set-face-attribute 'default nil
-                :family "Source Code Pro for Powerline" :height 145 :weight 'regular)
-(require 'relative-line-numbers)
-(global-relative-line-numbers-mode)
+                    :family "Source Code Pro for Powerline" :height 145 :weight 'regular)
+(use-package relative-line-numbers
+             :ensure relative-line-numbers
+             :config
+             (progn
+               (global-relative-line-numbers-mode)
+               ))
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 ; (toggle-full-screen)
@@ -23,7 +27,7 @@
   "After FEATURE is loaded, evaluate BODY."
   (declare (indent defun))
   `(eval-after-load ,feature
-     '(progn ,@body)))
+                    '(progn ,@body)))
 
 (provide 'init-core)
 ;;;
