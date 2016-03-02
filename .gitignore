@@ -2,3 +2,7 @@ emacs.d/elpa
 emacs.d/auto-save-list
 *l~
 *.DS_Store
+/emacs.d/config/init-evil.cl
+/emacs.d/config/init-magit.el
+/emacs.d/languages/#init-rust.el#
+/emacs.d/recentf

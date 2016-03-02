@@ -1,5 +1,8 @@
 ;;; Code:
 ;; Core Miscellaneous config
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
 (set-face-attribute 'default nil
                     :family "Source Code Pro for Powerline" :height 145 :weight 'regular)
 (use-package relative-line-numbers

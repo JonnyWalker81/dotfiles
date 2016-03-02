@@ -7,6 +7,8 @@
     (require 'smartparens-config)
     (smartparens-global-mode)
     (turn-on-show-smartparens-mode)
+    (show-smartparens-mode)
+    (show-smartparens-global-mode +1)
     
     ;; (defun my-open-block-c-mode (id action context)
     ;;   (when (eq action 'insert)

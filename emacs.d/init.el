@@ -33,6 +33,7 @@
 (require 'init-company)
 (require 'init-flycheck)
 (require 'init-smartparens)
+(require 'init-magit)
 
 (require 'init-powerline)
 (require 'init-spaceline)
