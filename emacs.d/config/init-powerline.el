@@ -7,7 +7,7 @@
     (use-package powerline-evil
       :ensure powerline-evil)
 
-    	    (setq powerline-default-separator 'wave)
+    	    (setq powerline-default-separator 'arrow)
     (use-package moe-theme
       :ensure moe-theme
       :config
@@ -31,20 +31,20 @@
 
     
     ;; change mode-line color by evil state
-    (lexical-let ((default-color (cons (face-background 'mode-line)
-				       (face-foreground 'mode-line))))
-      (add-hook 'post-command-hook
-		(lambda ()
-		  (let ((color (cond ((minibufferp) default-color)
-				     ((evil-insert-state-p) '("#e80000" . "#FFFFFF"))
-				     ((evil-emacs-state-p)  '("#444488" . "#FFFFFF"))
-				     ((buffer-modified-p)   '("#006fa0" . "#FFFFFF"))
-				     ((evil-visual-state-p) '("#e59400" . "#FFFFFF"))
-				     (t default-color))))
-		    (set-face-background 'mode-line (car color))
-		    (set-face-foreground 'mode-line (cdr color))
-		    (set-face-background 'mode-line-buffer-id (car color))
-		    (set-face-foreground 'mode-line-buffer-id (cdr color))))))
+    ;; (lexical-let ((default-color (cons (face-background 'mode-line)
+    ;; 				       (face-foreground 'mode-line))))
+    ;;   (add-hook 'post-command-hook
+    ;; 		(lambda ()
+    ;; 		  (let ((color (cond ((minibufferp) default-color)
+    ;; 				     ((evil-insert-state-p) '("#e80000" . "#FFFFFF"))
+    ;; 				     ((evil-emacs-state-p)  '("#444488" . "#FFFFFF"))
+    ;; 				     ((buffer-modified-p)   '("#006fa0" . "#FFFFFF"))
+    ;; 				     ((evil-visual-state-p) '("#e59400" . "#FFFFFF"))
+    ;; 				     (t default-color))))
+    ;; 		    (set-face-background 'mode-line (car color))
+    ;; 		    (set-face-foreground 'mode-line (cdr color))
+    ;; 		    (set-face-background 'mode-line-buffer-id (car color))
+    ;; 		    (set-face-foreground 'mode-line-buffer-id (cdr color))))))
     
     ))
 
