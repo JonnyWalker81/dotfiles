@@ -32,5 +32,20 @@
   `(eval-after-load ,feature
                     '(progn ,@body)))
 
+(defun cycle-powerline-separators (&optional reverse)
+  "Set Powerline separators in turn.  If REVERSE is not nil, go backwards."
+  (interactive)
+  (let* ((fn (if reverse 'reverse 'identity))
+         (separators (funcall fn '("arrow" "arrow-fade" "slant"
+                                   "chamfer" "wave" "brace" "roundstub" "zigzag"
+                                   "butt" "rounded" "contour" "curve")))
+         (found nil))
+    (while (not found)
+      (progn (setq separators (append (cdr separators) (list (car separators))))
+             (when (string= (car separators) powerline-default-separator)
+               (progn (setq powerline-default-separator (cadr separators))
+                      (setq found t)
+                      (redraw-display)))))))
+
 (provide 'init-core)
 ;;;

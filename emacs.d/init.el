@@ -10,6 +10,7 @@
 
 (add-to-list 'load-path (concat user-emacs-directory "config"))
 (add-to-list 'load-path (concat user-emacs-directory "languages"))
+(add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes"))
 (add-to-list 'load-path "/usr/share/emacs/site-lisp")
 
 (setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")
@@ -35,10 +36,11 @@
 (require 'init-smartparens)
 (require 'init-magit)
 
-(require 'init-powerline)
-(require 'init-spaceline)
+;(require 'init-powerline)
+(require 'init-powerline-ab)
+;(require 'init-spaceline)
 
-(provide 'init)
+(use-package gruvbox-theme :ensure t)
 
 
 (custom-set-variables
@@ -46,6 +48,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("badc4f9ae3ee82a5ca711f3fd48c3f49ebe20e6303bba1912d4e2d19dd60ec98" default)))
  '(gud-gdb-command-name "gdb --annotate=1")
  '(large-file-warning-threshold nil)
  '(ns-use-srgb-colorspace nil)
@@ -58,3 +63,20 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; (use-package color-theme-solarized
+;;   :ensure color-theme-solarized
+;;   :config
+;;   )
+
+;;; sRGB doesn't blend with Powerline's pixmap colors, but is only
+;;; used in OS X. Disable sRGB before setting up Powerline.
+(when (memq window-system '(mac ns))
+  (setq ns-use-srgb-colorspace nil))
+
+(load-theme 'gruvbox)
+;(load-theme 'solarized)
+
+(provide 'init)
+
+;;;
