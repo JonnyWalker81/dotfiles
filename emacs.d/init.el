@@ -35,6 +35,7 @@
 (require 'init-flycheck)
 (require 'init-smartparens)
 (require 'init-magit)
+;; (require 'init-info+)
 
 ;(require 'init-powerline)
 (require 'init-powerline-ab)

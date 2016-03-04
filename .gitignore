@@ -5,3 +5,5 @@ emacs.d/auto-save-list
 /emacs.d/config/init-evil.cl
 emacs.d/languages/#init-rust.el#
 /emacs.d/recentf
+emacs.d/eshell/
+/emacs.d/recentf~
