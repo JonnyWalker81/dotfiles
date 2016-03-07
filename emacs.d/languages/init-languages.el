@@ -5,6 +5,7 @@
 (require 'init-elisp)
 (require 'init-go)
 (require 'init-clojure)
+(require 'init-racket)
 
 (provide 'init-languages)
 ;;;
