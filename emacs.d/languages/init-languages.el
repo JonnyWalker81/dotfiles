@@ -6,6 +6,7 @@
 (require 'init-go)
 (require 'init-clojure)
 (require 'init-racket)
+(require 'init-groovy)
 
 (provide 'init-languages)
 ;;;

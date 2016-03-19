@@ -35,6 +35,7 @@
 (require 'init-flycheck)
 (require 'init-smartparens)
 (require 'init-magit)
+(require 'init-gradle)
 ;; (require 'init-info+)
 
 ;(require 'init-powerline)
