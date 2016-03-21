@@ -10,6 +10,7 @@
 
 (add-to-list 'load-path (concat user-emacs-directory "config"))
 (add-to-list 'load-path (concat user-emacs-directory "languages"))
+(add-to-list 'load-path (concat user-emacs-directory "lisp"))
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes"))
 (add-to-list 'load-path "/usr/share/emacs/site-lisp")
 
@@ -36,6 +37,7 @@
 (require 'init-smartparens)
 (require 'init-magit)
 (require 'init-gradle)
+(require 'gyp)
 ;; (require 'init-info+)
 
 ;(require 'init-powerline)
