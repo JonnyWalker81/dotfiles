@@ -7,6 +7,7 @@
 (require 'init-clojure)
 (require 'init-racket)
 (require 'init-groovy)
+(require 'init-c++)
 
 (provide 'init-languages)
 ;;;

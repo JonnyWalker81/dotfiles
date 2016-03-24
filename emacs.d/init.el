@@ -1,6 +1,6 @@
 ;;; Package -- Summary ;;
 ;;; Commentary:
-;; Emacs init.el file, I will try to keep this file clean and dlegate to other init files.
+; Emacs init.el file, I will try to keep this file clean and dlegate to other init files.
 
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
@@ -32,8 +32,10 @@
 (require 'init-languages)
 (require 'init-neotree)
 (require 'init-helm)
+(require 'init-rtags)
 (require 'init-company)
 (require 'init-flycheck)
+(require 'flycheck-rtags)
 (require 'init-smartparens)
 (require 'init-magit)
 (require 'init-gradle)

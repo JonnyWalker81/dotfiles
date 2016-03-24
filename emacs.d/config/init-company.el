@@ -11,6 +11,10 @@
 		(setq company-echo-delay 0)                          ; remove annoying blinking
 		(setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
 
+		(require 'company-rtags)
+		(push 'company-rtags company-backends)
+	        (global-company-mode)
+
 	       (use-package company-go
 			    :ensure company-go
 			    :config
