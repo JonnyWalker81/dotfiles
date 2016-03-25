@@ -19,7 +19,11 @@
     (evil-leader/set-key
 	"k" 'neotree-toggle
 	"x" 'helm-M-x
-	"t" 'helm-projectile-find-file)
+	"t" 'helm-projectile-find-file
+	"d" 'dired
+	"gs" 'magit-status
+	"gt" 'rtags-find-symbol-at-point
+	"e" 'eshell)
 
     (add-hook 'c-mode-common-hook
 	      (lambda()
