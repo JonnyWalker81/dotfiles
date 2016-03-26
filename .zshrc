@@ -1,14 +1,19 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/jrothberg/.oh-my-zsh
+export ZSH=/Users/jwalker/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+ZSH_THEME="powerline"
+
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -45,14 +50,19 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git colorize zsh-syntax-highlighting)
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Users/jrothberg/.rvm/gems/ruby-2.1.2/bin:/Users/jrothberg/.rvm/gems/ruby-2.1.2@global/bin:/Users/jrothberg/.rvm/rubies/ruby-2.1.2/bin:/Users/jrothberg/.rvm/bin:/Users/jrothberg/.rvm/bin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
+
+
+POWERLINE_RIGHT_A="date"
+POWERLINE_PATH="short"
+POWERLINE_DETECT_SSH="true"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -79,5 +89,28 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export PATH="$PATH:/Users/jrothberg/.cargo/bin"
-export RUST_SRC_PATH="/Users/jrothberg/Downloads/rustc-nightly/src"
+# if [ -f /usr/local/share/liquidprompt ]; then
+#     . /usr/local/share/liquidprompt
+# fi
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+
+export ANDROID_NDK_HOME=$HOME/Library/Android/sdk/ndk-bundle
+export PATH=$PATH:$ANDROID_NDK_HOME
+
+export PATH=/Users/jwalker/.multirust:/Users/jwalker/.multirust/bin:$PATH:/Users/jwalker/.cargo/bin
+
+#export PATH=/usr/bin:$PATH
+
+#export PYTHONPATH=/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Resources/Python:$PYTHONPATH
+
+export GOPATH=~/go
+export PATH=$PATH:$GOPATH/bin
+
+export RUST_SRC_PATH=~/Downloads/rustc-nightly/src
+
+alias emacs="/usr/local/Cellar/emacs/HEAD/bin/emacs-25.1.50"
