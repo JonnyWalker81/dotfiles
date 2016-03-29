@@ -40,6 +40,7 @@
 (require 'init-magit)
 (require 'init-gradle)
 (require 'gyp)
+(require 'init-yasnippet)
 ;; (require 'init-info+)
 
 ;(require 'init-powerline)
