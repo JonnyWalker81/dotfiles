@@ -39,7 +39,7 @@
     (my-insert-copyright-header)
     (insert "\n")
     (insert (format "#include \"%s.hpp\"\n\n" file-name))
-    (insert (format "%s::%s(){\n" file-name file-name))
+    (insert (format "%s::%s(){\n\n" file-name file-name))
     (insert "}\n")
     (write-file (format "%s.cpp" file-name))
     )
