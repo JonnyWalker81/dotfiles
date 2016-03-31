@@ -26,7 +26,6 @@
     (package-install 'use-package))
 
 (require 'use-package)
-
 (require 'init-core)
 (require 'init-evil)
 (require 'init-languages)
