@@ -14,7 +14,7 @@
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes"))
 (add-to-list 'load-path "/usr/share/emacs/site-lisp")
 
-(setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")
+(setq package-archives '(("melpa" . "http://melpa.org/packages/")
                          ("org" . "http://orgmode.org/elpa/")
                          ("gnu" . "http://elpa.gnu.org/packages/")))
 

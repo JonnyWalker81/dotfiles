@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/jwalker/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -102,7 +102,7 @@ export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 export ANDROID_NDK_HOME=$HOME/Library/Android/sdk/ndk-bundle
 export PATH=$PATH:$ANDROID_NDK_HOME
 
-export PATH=/Users/jwalker/.multirust:/Users/jwalker/.multirust/bin:$PATH:/Users/jwalker/.cargo/bin
+export PATH=~/.multirust:/Users/jwalker/.multirust/bin:$PATH:/Users/jwalker/.cargo/bin
 
 #export PATH=/usr/bin:$PATH
 

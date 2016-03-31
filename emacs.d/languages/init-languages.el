@@ -8,6 +8,7 @@
 (require 'init-racket)
 (require 'init-groovy)
 (require 'init-c++)
+(require 'init-csharp)
 
 (provide 'init-languages)
 ;;;
