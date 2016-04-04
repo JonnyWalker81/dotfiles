@@ -14,6 +14,7 @@
 (setq ispell-extra-args '("-d en_US"))
 
 (global-prettify-symbols-mode +1)
+(setq compilation-scroll-output t)
 
 (set-face-attribute 'default nil
                     :family "Source Code Pro for Powerline" :height 145 :weight 'regular)
