@@ -18,6 +18,7 @@
 (ido-mode 1)
 
 (global-prettify-symbols-mode +1)
+(setq compilation-scroll-output t)
 
 ;; (setq split-window-preferred-function 'split-window-horizontally)
 ;; (setq split-height-threshold nil)

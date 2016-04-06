@@ -60,6 +60,7 @@
 
     (add-to-list 'evil-emacs-state-modes 'cider-mode)
     (add-to-list 'evil-emacs-state-modes 'eshell-mode)
+    (evil-ex-define-cmd "bd[elete]" 'kill-buffer)
     
     ;; Fix cursor
     (defun my-send-string-to-terminal (string)
