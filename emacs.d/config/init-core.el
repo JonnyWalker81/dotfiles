@@ -20,6 +20,12 @@
 (global-prettify-symbols-mode +1)
 (setq compilation-scroll-output t)
 
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
 ;; (setq split-window-preferred-function 'split-window-horizontally)
 ;; (setq split-height-threshold nil)
 ;; (setq split-width-threshold most-positive-fixnum)
