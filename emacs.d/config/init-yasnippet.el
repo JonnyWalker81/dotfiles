@@ -7,8 +7,13 @@
 ;;     (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
 ;;     ))
 
-(require 'yasnippet)
-(setq yas-snippet-dirs '("~/Repositories/yasnippet-snippets"))
-(yas-global-mode 1)
+(use-package yasnippet
+  :load-path "lisp/"
+  :defer t
+  :config
+  (progn
+    (setq yas-snippet-dirs '("~/Repositories/yasnippet-snippets"))
+    (yas-global-mode 1)
+    ))
 (provide 'init-yasnippet)
 ;;;

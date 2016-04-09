@@ -94,12 +94,26 @@ FORCE-OTHER-WINDOW is ignored."
 
 (set-face-attribute 'default nil
                     :family "Source Code Pro for Powerline" :height 145 :weight 'regular)
+;; (use-package relative-line-numbers
+;;              :ensure relative-line-numbers
+;;              :config
+;;              (progn
+;;                (global-relative-line-numbers-mode)
+;;                ))
+
 (use-package relative-line-numbers
-             :ensure relative-line-numbers
-             :config
-             (progn
-               (global-relative-line-numbers-mode)
-               ))
+  :ensure relative-line-numbers
+  :init
+  (defun abs-rel-numbers (offset)
+    (if (= offset 0)
+        (format "%4d " (line-number-at-pos))
+      (format "%4d " (abs offset))))
+  :config
+  (progn
+    (global-relative-line-numbers-mode)
+    ))
+
+  (setq relative-line-numbers-format #'abs-rel-numbers)
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 ; (toggle-full-screen)
