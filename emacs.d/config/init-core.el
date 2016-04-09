@@ -20,6 +20,12 @@
 (global-prettify-symbols-mode +1)
 (setq compilation-scroll-output t)
 
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
 ;; (setq split-window-preferred-function 'split-window-horizontally)
 ;; (setq split-height-threshold nil)
 ;; (setq split-width-threshold most-positive-fixnum)
@@ -86,7 +92,6 @@ FORCE-OTHER-WINDOW is ignored."
 
 (setq display-buffer-function 'my-display-buffer)
 
-
 (set-face-attribute 'default nil
                     :family "Source Code Pro for Powerline" :height 145 :weight 'regular)
 (use-package relative-line-numbers
@@ -115,6 +120,11 @@ FORCE-OTHER-WINDOW is ignored."
   (declare (indent defun))
   `(eval-after-load ,feature
                     '(progn ,@body)))
+
+(defun my-compilation-mode-hook ()
+  (setq truncate-lines nil) ;; automatically becomes buffer local
+  (set (make-local-variable 'truncate-partial-width-windows) nil))
+(add-hook 'compilation-mode-hook 'my-compilation-mode-hook)
 
 (defun cycle-powerline-separators (&optional reverse)
   "Set Powerline separators in turn.  If REVERSE is not nil, go backwards."

@@ -61,6 +61,9 @@
     (add-to-list 'evil-emacs-state-modes 'cider-mode)
     (add-to-list 'evil-emacs-state-modes 'eshell-mode)
     (evil-ex-define-cmd "bd[elete]" 'kill-buffer)
+
+    (require 'evil-surround)
+    (global-evil-surround-mode 1)
     
     ;; Fix cursor
     (defun my-send-string-to-terminal (string)
