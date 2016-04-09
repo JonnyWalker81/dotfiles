@@ -49,6 +49,14 @@
       )
   )
 
+(add-to-list 'display-buffer-alist
+             `(,(rx bos "*compilation*" eos)
+               (display-buffer-reuse-window
+                display-buffer-in-side-window)
+               (reusable-frames . visible)
+               (side            . right)
+               (window-height   . 0.5)))
+
 ;; (add-hook 'compilation-mode-hook 'my-compilation-hook)
 
 (defun my-display-buffer (buffer force-other-window)
