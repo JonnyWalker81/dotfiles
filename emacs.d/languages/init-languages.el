@@ -9,6 +9,7 @@
 (require 'init-groovy)
 (require 'init-c++)
 (require 'init-csharp)
+(require 'init-swift)
 
 (provide 'init-languages)
 ;;;

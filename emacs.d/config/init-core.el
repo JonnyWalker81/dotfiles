@@ -114,6 +114,11 @@ FORCE-OTHER-WINDOW is ignored."
   `(eval-after-load ,feature
                     '(progn ,@body)))
 
+(defun my-compilation-mode-hook ()
+  (setq truncate-lines nil) ;; automatically becomes buffer local
+  (set (make-local-variable 'truncate-partial-width-windows) nil))
+(add-hook 'compilation-mode-hook 'my-compilation-mode-hook)
+
 (defun cycle-powerline-separators (&optional reverse)
   "Set Powerline separators in turn.  If REVERSE is not nil, go backwards."
   (interactive)

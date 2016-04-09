@@ -26,6 +26,7 @@
 	(sp-local-pair 'c++-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
 	(sp-local-pair 'c-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
 	(sp-local-pair 'csharp-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
+	(sp-local-pair 'swift-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
 
 
 	(defun my-create-newline-and-enter-sexp (&rest _ignored)
