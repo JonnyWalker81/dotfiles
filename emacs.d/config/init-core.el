@@ -84,7 +84,6 @@ FORCE-OTHER-WINDOW is ignored."
 
 (setq display-buffer-function 'my-display-buffer)
 
-
 (set-face-attribute 'default nil
                     :family "Source Code Pro for Powerline" :height 145 :weight 'regular)
 (use-package relative-line-numbers
