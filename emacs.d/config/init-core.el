@@ -20,6 +20,13 @@
 (global-prettify-symbols-mode +1)
 (setq compilation-scroll-output t)
 
+(require 'whitespace)
+(setq whitespace-line-column 80) ;; limit line length
+(setq whitespace-style '(face lines-tail))
+
+(add-hook 'prog-mode-hook 'whitespace-mode)
+(add-hook 'org-mode-hook 'whitespace-mode)
+
 (autoload 'markdown-mode "markdown-mode"
    "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))

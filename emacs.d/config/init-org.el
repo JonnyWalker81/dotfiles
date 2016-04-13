@@ -4,7 +4,6 @@
 
 (add-hook 'org-mode-hook (lambda()
 			   (auto-fill-mode 1)
-			   (fill-paragraph 1)
 			   (flyspell-mode 1)))
 
 ;; Point to plantuml.jar, for example:

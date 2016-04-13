@@ -2,7 +2,7 @@
 
 (use-package flycheck
   :ensure flycheck
-  :init (add-to-list 'flycheck-checkers 'swift)
+  ;; :init (add-to-list 'flycheck-checkers 'swift)
 	     :config
 	     (progn
 	       (global-flycheck-mode)
