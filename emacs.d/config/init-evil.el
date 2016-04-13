@@ -2,7 +2,7 @@
 ;; Evil mode config
 
 ;; In order to work properly, we need to load evil-leader-mode before we load
-;; evil-mode.
+;g; evil-mode.
 (use-package evil-leader
   :commands (evil-leader-mode global-evil-leader-mode)
   :ensure evil-leader
@@ -23,7 +23,9 @@
 	"d" 'dired
 	"gs" 'magit-status
 	"gt" 'rtags-find-symbol-at-point
-	"e" 'eshell)
+	"e" 'eshell
+	"ag" 'helm-do-ag
+	"at" 'helm-do-ag-this-file)
 
     (add-hook 'c-mode-common-hook
 	      (lambda()

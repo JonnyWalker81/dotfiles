@@ -43,14 +43,15 @@
 ;; (require 'init-info+)
 
 ;(require 'init-powerline)
-(require 'init-powerline-ab)
 ;(require 'init-spaceline)
 
-;; (use-package badwolf-theme :ensure t)
+
+(use-package badwolf-theme :ensure t)
 ;; (use-package monokai-theme :ensure t)
 ;; (use-package molokai-theme :ensure t)
 (use-package gruvbox-theme :ensure t)
 
+(require 'init-powerline-ab)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -92,9 +93,10 @@
 
 
 ;; (load-theme (random-element theme-list)) 
-(load-theme 'gruvbox)  
+;; (load-theme 'gruvbox)  
 ;(load-theme 'solarized)
 (load-theme 'badwolf)
+;; (load-theme 'monokai)
 
 (provide 'init)
 

@@ -94,7 +94,8 @@
 	))
 
 	;(moe-dark)
-  (air--powerline-default-theme))
+      (air--powerline-default-theme)
+      )
 
 (use-package powerline-evil
   :ensure t)
