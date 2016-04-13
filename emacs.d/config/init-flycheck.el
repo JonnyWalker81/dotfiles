@@ -1,7 +1,8 @@
 ;;; Code:
 
 (use-package flycheck
-	     :ensure flycheck
+  :ensure flycheck
+  :init (add-to-list 'flycheck-checkers 'swift)
 	     :config
 	     (progn
 	       (global-flycheck-mode)
@@ -9,6 +10,7 @@
 			 (lambda()
 			   (evil-leader/set-key
 			     "fc" 'flycheck-buffer)))
+
 	       ))
 
 (provide 'init-flycheck)

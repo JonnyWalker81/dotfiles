@@ -55,6 +55,14 @@
       )
   )
 
+(add-to-list 'display-buffer-alist
+             `(,(rx bos "*compilation*" eos)
+               (display-buffer-reuse-window
+                display-buffer-in-side-window)
+               (reusable-frames . visible)
+               (side            . right)
+               (window-height   . 0.5)))
+
 ;; (add-hook 'compilation-mode-hook 'my-compilation-hook)
 
 (defun my-display-buffer (buffer force-other-window)
@@ -86,12 +94,26 @@ FORCE-OTHER-WINDOW is ignored."
 
 (set-face-attribute 'default nil
                     :family "Source Code Pro for Powerline" :height 145 :weight 'regular)
+;; (use-package relative-line-numbers
+;;              :ensure relative-line-numbers
+;;              :config
+;;              (progn
+;;                (global-relative-line-numbers-mode)
+;;                ))
+
 (use-package relative-line-numbers
-             :ensure relative-line-numbers
-             :config
-             (progn
-               (global-relative-line-numbers-mode)
-               ))
+  :ensure relative-line-numbers
+  :init
+  (defun abs-rel-numbers (offset)
+    (if (= offset 0)
+        (format "%4d " (line-number-at-pos))
+      (format "%4d " (abs offset))))
+  :config
+  (progn
+    (global-relative-line-numbers-mode)
+    ))
+
+  (setq relative-line-numbers-format #'abs-rel-numbers)
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 ; (toggle-full-screen)
@@ -112,6 +134,11 @@ FORCE-OTHER-WINDOW is ignored."
   (declare (indent defun))
   `(eval-after-load ,feature
                     '(progn ,@body)))
+
+(defun my-compilation-mode-hook ()
+  (setq truncate-lines nil) ;; automatically becomes buffer local
+  (set (make-local-variable 'truncate-partial-width-windows) nil))
+(add-hook 'compilation-mode-hook 'my-compilation-mode-hook)
 
 (defun cycle-powerline-separators (&optional reverse)
   "Set Powerline separators in turn.  If REVERSE is not nil, go backwards."

@@ -12,7 +12,14 @@
     (add-hook 'rust-mode-hook #'racer-mode)
     (add-hook 'racer-mode-hook #'eldoc-mode)
     (setq racer-cmd "~/.cargo/bin/racer")
-    (setq racer-rust-src-path "~/.multirust/toolchains/nightly/src/")
+    (setq racer-rust-src-path "~/.multirust/toolchains/nightly-x86_64-apple-darwin/src")
+
+    (use-package cargo
+      :ensure cargo
+      :config
+      (progn
+	(add-hook 'rust-mode-hook 'cargo-minor-mode)
+	))
 
     (use-package company-racer
       :ensure company-racer

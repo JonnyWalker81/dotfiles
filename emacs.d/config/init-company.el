@@ -25,6 +25,12 @@
 				    (company-mode)
 				    (go-mode-setup)))
 			      ))
+	       (use-package company-sourcekit
+		 :ensure company-sourcekit
+		 :init (add-to-list 'company-backends 'company-sourcekit)
+		 :config
+		 (progn
+		   ))
 	       ))
 
 (provide 'init-company)
