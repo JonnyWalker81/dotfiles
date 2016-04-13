@@ -26,7 +26,16 @@
       :config
       (progn
 	(add-hook 'racer-mode-hook #'company-mode)
+	(global-set-key (kbd "TAB") #'company-indent-or-complete-common) ;
+	(setq company-tooltip-align-annotations t)
 
+	))
+
+    (use-package flycheck-rust
+      :ensure flycheck-rust
+      :config
+      (progn
+	(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 	))
     ))
 

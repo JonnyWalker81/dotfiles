@@ -43,7 +43,6 @@
 ;; (require 'init-info+)
 
 ;(require 'init-powerline)
-(require 'init-powerline-ab)
 ;(require 'init-spaceline)
 
 (use-package badwolf-theme :ensure t)
@@ -51,6 +50,7 @@
 ;; (use-package molokai-theme :ensure t)
 (use-package gruvbox-theme :ensure t)
 
+(require 'init-powerline-ab)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
