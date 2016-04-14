@@ -24,7 +24,7 @@
       :ensure helm-ag
       :config
       (progn
-	(setq helm-ag-always-set-extra-option t)
+	;; (setq helm-ag-always-set-extra-option nil)
 	))
     ))
 
