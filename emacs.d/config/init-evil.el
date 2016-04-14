@@ -24,7 +24,7 @@
 	"gs" 'magit-status
 	"gt" 'rtags-find-symbol-at-point
 	"e" 'eshell
-	"ag" 'helm-do-ag
+	"ag" 'helm-projectile-ag
 	"at" 'helm-do-ag-this-file)
 
     (add-hook 'c-mode-common-hook
