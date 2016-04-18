@@ -11,7 +11,12 @@
 			   (evil-leader/set-key
 			     "fc" 'flycheck-buffer)))
 
+	       (add-to-list 'flycheck-checkers 'swift)
 	       ))
+
+	       (defun my-set-ios-sdk-path ()
+		   (interactive)
+		   (setq flycheck-swift-sdk-path "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.3.sdk"))
 
 (provide 'init-flycheck)
 ;;;
