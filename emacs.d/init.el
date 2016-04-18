@@ -16,7 +16,8 @@
 
 (setq package-archives '(("melpa" . "http://melpa.org/packages/")
                          ("org" . "http://orgmode.org/elpa/")
-                         ("gnu" . "http://elpa.gnu.org/packages/")))
+                         ("gnu" . "http://elpa.gnu.org/packages/")
+			 ("marmalade" . "http://marmalade-repo.org/packages/")))
 
 (require 'package)
 (package-initialize)
@@ -40,6 +41,7 @@
 (require 'init-gradle)
 (require 'gyp)
 (require 'init-yasnippet)
+(require 'init-hackernews)
 ;; (require 'init-info+)
 
 ;(require 'init-powerline)
