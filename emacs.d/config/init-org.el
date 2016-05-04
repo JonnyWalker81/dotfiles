@@ -1,6 +1,6 @@
 ;;; Code:
 
-(setq org-latex-to-pdf-process '("texi2dvi --pdf --clean --verbose --batch %f"))
+;; (setq org-latex-to-pdf-process '("/usr/local/texlive/2015basic/bin/universal-darwin/pdftex %f"))
 
 (add-hook 'org-mode-hook (lambda()
 			   (auto-fill-mode 1)
