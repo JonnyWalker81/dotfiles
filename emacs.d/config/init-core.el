@@ -162,5 +162,11 @@ FORCE-OTHER-WINDOW is ignored."
                       (setq found t)
                       (redraw-display)))))))
 
+(use-package multiple-cursors
+  :ensure multiple-cursors
+  :config
+  (progn
+    
+    ))
 (provide 'init-core)
 ;;;
