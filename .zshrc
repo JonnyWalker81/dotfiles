@@ -111,6 +111,8 @@ export PATH=~/.multirust:/Users/jwalker/.multirust/bin:$PATH:/Users/jwalker/.car
 export GOPATH=~/go
 export PATH=$PATH:$GOPATH/bin
 
-export RUST_SRC_PATH=~/Downloads/rustc-nightly/src
+export RUST_SRC_PATH=~/.multirust/toolchains/nightly-x86_64-apple-darwin/src
 
 alias emacs="/usr/local/Cellar/emacs/HEAD/bin/emacs-25.1.50"
+
+export PATH="$HOME/.cargo/bin:$PATH"

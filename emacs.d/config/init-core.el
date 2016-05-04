@@ -17,6 +17,15 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 
+(use-package smooth-scrolling
+  :ensure smooth-scrolling
+  :config
+  (progn
+
+    ))
+
+(smooth-scrolling-mode 1)
+
 (global-prettify-symbols-mode +1)
 (setq compilation-scroll-output t)
 
