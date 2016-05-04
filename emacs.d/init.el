@@ -61,6 +61,9 @@
    (quote
     ("b571f92c9bfaf4a28cb64ae4b4cdbda95241cd62cf07d942be44dc8f46c491f4" "6c62b1cd715d26eb5aa53843ed9a54fc2b0d7c5e0f5118d4efafa13d7715c56e" "30ba590271e63571536bcded60eca30e0645011a860be1c987fc6476c1603f15" "badc4f9ae3ee82a5ca711f3fd48c3f49ebe20e6303bba1912d4e2d19dd60ec98" default)))
  '(gud-gdb-command-name "gdb --annotate=1")
+ '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
+ '(helm-ag-command-option "--all-text")
+ '(helm-ag-insert-at-point (quote symbol))
  '(large-file-warning-threshold nil)
  '(ns-use-srgb-colorspace nil)
  '(package-selected-packages

@@ -16,6 +16,10 @@
    ;; ... add more above this line when needed ...
    ))
 
+(setq org-log-done 'time)
+(setq org-log-done-with-time)
+(setq org-time-stamp-custom-formats)
+
 ;; Disable confirmation question when evaluating (C-c C-c) these languages
 (defun my-org-confirm-babel-evaluate (lang body)
   (not (or (string= lang "plantuml")
