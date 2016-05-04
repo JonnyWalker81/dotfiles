@@ -1,10 +1,23 @@
 ;;; Code:
 
 ;; (setq org-latex-to-pdf-process '("/usr/local/texlive/2015basic/bin/universal-darwin/pdftex %f"))
+(use-package org-bullets
+  :ensure org-bullets
+  :config
+  (progn
+
+    ))
 
 (add-hook 'org-mode-hook (lambda()
 			   (auto-fill-mode 1)
-			   (flyspell-mode 1)))
+			   (flyspell-mode 1)
+			   (org-bullets-mode t)
+			   ))
+
+(setq org-hide-leading-stars t)
+(setq org-ellipsis "⤵")
+(setq org-src-fontify-natively t)
+(setq org-src-tab-acts-natively t)
 
 ;; Point to plantuml.jar, for example:
 (setq org-plantuml-jar-path "~/Downloads/plantuml.jar")
@@ -15,6 +28,9 @@
  '((plantuml . t)
    ;; ... add more above this line when needed ...
    ))
+
+
+(setq org-log-done 'time)
 
 ;; Disable confirmation question when evaluating (C-c C-c) these languages
 (defun my-org-confirm-babel-evaluate (lang body)
