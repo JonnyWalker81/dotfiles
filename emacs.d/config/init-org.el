@@ -1,13 +1,12 @@
 ;;; Code:
 
+;; (setq org-latex-to-pdf-process '("/usr/local/texlive/2015basic/bin/universal-darwin/pdftex %f"))
 (use-package org-bullets
   :ensure org-bullets
   :config
   (progn
 
     ))
-
-(setq org-latex-to-pdf-process '("texi2dvi --pdf --clean --verbose --batch %f"))
 
 (add-hook 'org-mode-hook (lambda()
 			   (auto-fill-mode 1)
