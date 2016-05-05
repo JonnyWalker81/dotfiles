@@ -116,3 +116,4 @@ export RUST_SRC_PATH=~/.multirust/toolchains/nightly-x86_64-apple-darwin/src
 alias emacs="/usr/local/Cellar/emacs/HEAD/bin/emacs-25.1.50"
 
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH=$PATH:/Library/TeX/texbin
