@@ -25,7 +25,8 @@
 	"gt" 'rtags-find-symbol-at-point
 	"e" 'eshell
 	"ag" 'helm-projectile-ag
-	"at" 'helm-do-ag-this-file)
+	"at" 'helm-do-ag-this-file
+	"o" 'find-file)
 
     (add-hook 'c-mode-common-hook
 	      (lambda()

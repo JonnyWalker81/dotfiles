@@ -41,6 +41,7 @@
 (require 'init-gradle)
 (require 'gyp)
 (require 'init-yasnippet)
+(require 'init-org)
 (require 'init-hackernews)
 ;; (require 'init-info+)
 

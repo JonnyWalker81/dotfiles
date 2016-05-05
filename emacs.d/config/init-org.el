@@ -50,4 +50,5 @@
 (setq org-babel-default-header-args:PlantUML
       '((:results . "file") (:exports . "results") (:noweb . "yes") (:cmdline . "-charset UTF-8")))
 
+(provide 'init-org)
 ;;;
