@@ -14,6 +14,13 @@
 			   (org-bullets-mode t)
 			   ))
 
+(use-package ox-twbs
+  :ensure ox-twbs
+  :config
+  (progn
+
+    ))
+
 (setq org-hide-leading-stars t)
 (setq org-ellipsis "⤵")
 (setq org-src-fontify-natively t)
