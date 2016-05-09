@@ -26,6 +26,9 @@
 
 (smooth-scrolling-mode 1)
 
+(require 'move-lines)
+(move-lines-binding)
+
 (global-prettify-symbols-mode +1)
 (setq compilation-scroll-output t)
 

@@ -2,7 +2,7 @@
 
 (use-package flycheck
   :ensure flycheck
-  :init (add-to-list 'flycheck-checkers 'swift)
+  ;; :init (add-to-list 'flycheck-checkers 'swift)
 	     :config
 	     (progn
 	       (global-flycheck-mode)
@@ -11,7 +11,7 @@
 			   (evil-leader/set-key
 			     "fc" 'flycheck-buffer)))
 
-	       (add-to-list 'flycheck-checkers 'swift)
+	       (add-to-lisT 'flycheck-checkers 'swift)
 	       ))
 
 	       (defun my-set-ios-sdk-path ()
