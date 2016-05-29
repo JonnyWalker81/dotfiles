@@ -25,6 +25,7 @@
 (setq org-ellipsis "⤵")
 (setq org-src-fontify-natively t)
 (setq org-src-tab-acts-natively t)
+(setq org-html-checkbox-type 'html)
 
 ;; Point to plantuml.jar, for example:
 (setq org-plantuml-jar-path "~/Downloads/plantuml.jar")
