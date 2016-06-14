@@ -1,9 +1,21 @@
 ;;; Code:
 
 (require 'rtags)
+(require 'clang-format)
 
 (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
 (add-hook 'c++-mode-common-hook 'rtags-start-process-unless-running)
+
+;; Hook function
+(defun clang-format-before-save ()
+  "Add this to .emacs to clang-format on save
+ (add-hook 'before-save-hook 'clang-format-before-save)."
+
+  (interactive)
+  (when (eq major-mode 'c++-mode) (clang-format-buffer)))
+
+;; Install hook to use clang-format on save
+(add-hook 'before-save-hook 'clang-format-before-save)
 
 (defun my-c++-insert-header (file-name)
   "Insert a header into a C++ Header file.

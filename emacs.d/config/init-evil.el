@@ -28,7 +28,7 @@
       "at" 'helm-do-ag-this-file
       "o" 'find-file)
 
-    (add-hook 'c-mode-common-hook
+    (add-hook 'prog-mode-hook
 	      (lambda()
 		(evil-leader/set-key
 		  "s" 'ff-find-other-file)))

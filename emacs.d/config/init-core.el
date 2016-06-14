@@ -24,6 +24,8 @@
 
     ))
 
+(setq-default indent-tabs-mode nil)
+
 (smooth-scrolling-mode 1)
 
 (require 'move-lines)
@@ -180,5 +182,12 @@ FORCE-OTHER-WINDOW is ignored."
   (progn
     
     ))
+
+(defun my-load-project-config ()
+  (message "loading file...")
+  (expand-file-name)
+  )
+
+(add-hook 'prog-mode-hook 'my-load-project-config)
 (provide 'init-core)
 ;;;
