@@ -33,6 +33,7 @@
 
 (global-prettify-symbols-mode +1)
 (setq compilation-scroll-output t)
+;; (setq compilation-scroll-output 'first-error)
 
 (require 'whitespace)
 (setq whitespace-line-column 80) ;; limit line length

@@ -40,5 +40,13 @@
 	))
     ))
 
+(use-package company-ghc
+  :ensure company-ghc
+  :init (add-to-list 'company-backends 'company-ghc)
+  :config
+  (progn
+    (custom-set-variables '(company-ghc-show-info t))
+    ))
+
 (provide 'init-company)
 ;;;
