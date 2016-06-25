@@ -17,16 +17,25 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 
-(use-package smooth-scrolling
-  :ensure smooth-scrolling
-  :config
-  (progn
+;; (use-package smooth-scrolling
+;;   :ensure smooth-scrolling
+;;   :config
+;;   (progn
 
-    ))
+;;     ))
+
+;; (smooth-scrolling-mode 1)
+
+
+(use-package smooth-scrolling
+  :ensure t
+  :config (setq smooth-scroll-margin 2)
+  :init (smooth-scrolling-mode 1))
+(setq mouse-wheel-scroll-amount '(1 ((shift) .1) ((control) . nil)))
+(setq mouse-wheel-progressive-speed nil)
 
 (setq-default indent-tabs-mode nil)
 
-(smooth-scrolling-mode 1)
 
 (require 'move-lines)
 (move-lines-binding)
