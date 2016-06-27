@@ -7,9 +7,10 @@
 
     (let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
       (setenv "PATH" (concat my-cabal-path path-separator (getenv "PATH")))
-      (add-to-list 'exec-path my-cabal-path))
-      (add-to-list 'exec-path (expand-file-name "~/Library/Haskell/bin"))
+      (add-to-list 'exec-path my-cabal-path)
+      (add-to-list 'exec-path (expand-file-name "~/Library/Haskell/bin")))
     (custom-set-variables '(haskell-tags-on-save t))
+    (add-hook 'before-save-hook 'haskell-mode-stylish-buffer)
 
     ))
 
