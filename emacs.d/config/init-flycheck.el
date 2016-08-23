@@ -11,7 +11,7 @@
 			   (evil-leader/set-key
 			     "fc" 'flycheck-buffer)))
 
-	       (add-to-lisT 'flycheck-checkers 'swift)
+	       (add-to-list 'flycheck-checkers 'swift)
 	       ))
 
 	       (defun my-set-ios-sdk-path ()
