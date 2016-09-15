@@ -36,6 +36,7 @@
 
 (setq-default indent-tabs-mode nil)
 
+(require 'ox-confluence)
 
 (require 'move-lines)
 (move-lines-binding)

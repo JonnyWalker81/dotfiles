@@ -11,6 +11,7 @@
 (require 'init-csharp)
 (require 'init-swift)
 (require 'init-haskell)
+(require 'init-scala)
 
 (provide 'init-languages)
 ;;;
