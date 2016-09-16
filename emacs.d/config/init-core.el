@@ -184,11 +184,11 @@ FORCE-OTHER-WINDOW is ignored."
     
     ))
 
-(defun my-load-project-config ()
-  (message "loading file...")
-  (expand-file-name)
-  )
+;;(defun my-load-project-config ()
+;;  (message "loading file...")
+;;  (expand-file-name)
+;;  )
 
-(add-hook 'prog-mode-hook 'my-load-project-config)
+;;(add-hook 'prog-mode-hook 'my-load-project-config)
 (provide 'init-core)
 ;;;
