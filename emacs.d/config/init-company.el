@@ -20,33 +20,36 @@
       :ensure company-go
       :config
       (progn
-	
-	(add-hook 'go-mode-hook (lambda ()
-				  (set (make-local-variable 'company-backends) '(company-go))
-				  (company-mode)
-				  (go-mode-setup)))
-	))
+        
+        (add-hook 'go-mode-hook (lambda ()
+                                  (set (make-local-variable 'company-backends) '(company-go))
+                                  (company-mode)
+                                  (go-mode-setup)))
+        ))
     (use-package company-sourcekit
       :ensure company-sourcekit
       :init (add-to-list 'company-backends 'company-sourcekit)
       :config
       (progn
-	;; (setq sourcekit-verbose nil)
-	;; (setq company-sourcekit-verbose nil)
-	;; (defadvice sourcekit-project (after find-git-rel-project activate)
-	;;   (message "advice...")
-	;;   (setq ad-return-value "/Users/jrothberg/Repositories/Mako/mako.xcodeproj")
-	;;   )
-	))
+        ;; (setq sourcekit-verbose nil)
+        ;; (setq company-sourcekit-verbose nil)
+        ;; (defadvice sourcekit-project (after find-git-rel-project activate)
+        ;;   (message "advice...")
+        ;;   (setq ad-return-value "/Users/jrothberg/Repositories/Mako/mako.xcodeproj")
+        ;;   )
+        ))
+
+    (use-package company-ghc
+      :ensure company-ghc
+      :init (add-to-list 'company-backends 'company-ghc)
+      :config
+      (progn
+        (custom-set-variables '(company-ghc-show-info t))
+        ))
+    
     ))
 
-(use-package company-ghc
-  :ensure company-ghc
-  :init (add-to-list 'company-backends 'company-ghc)
-  :config
-  (progn
-    (custom-set-variables '(company-ghc-show-info t))
-    ))
+
 
 (provide 'init-company)
 ;;;

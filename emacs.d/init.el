@@ -26,14 +26,6 @@
     (package-refresh-contents)
     (package-install 'use-package))
 
-(if (require 'quelpa nil t)
-    (quelpa-self-upgrade)
-  (with-temp-buffer
-    (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
-    (eval-buffer)))
-
-
-(setq quelpa-upgrade-p t)
 
 (require 'use-package)
 (require 'init-core)
