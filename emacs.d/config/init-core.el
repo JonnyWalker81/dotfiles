@@ -17,6 +17,14 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 
+(use-package ox-reveal
+  :ensure ox-reveal
+  :config
+  (progn
+    (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0")
+    
+    ))
+
 ;; (use-package smooth-scrolling
 ;;   :ensure smooth-scrolling
 ;;   :config
