@@ -26,6 +26,17 @@
 
 ;; (smooth-scrolling-mode 1)
 
+(use-package dash
+  :ensure dash
+  :config
+  (progn
+    ))
+
+(use-package dash-functional
+  :ensure dash-functional
+  :config
+  (progn
+    ))
 
 (use-package smooth-scrolling
   :ensure t
@@ -197,6 +208,20 @@ FORCE-OTHER-WINDOW is ignored."
   (message "loading file...")
   (expand-file-name)
   )
+
+(defun parse-csv-file (file)
+  (interactive
+   (list (read-file-name "CSV file: ")))
+  (let ((buf (find-file-noselect file))
+        (result nil))
+    (with-current-buffer buf
+      (goto-char (point-min))
+      (while (not (eobp))
+        (let ((line (buffer-substring-no-properties
+                     (line-beginning-position) (line-end-position))))
+          (push (split-string line ",") result))
+        (forward-line 1)))
+    (reverse result)))
 
 (add-hook 'prog-mode-hook 'my-load-project-config)
 (provide 'init-core)
