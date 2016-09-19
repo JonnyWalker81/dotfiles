@@ -17,6 +17,14 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 
+(use-package ox-reveal
+  :ensure ox-reveal
+  :config
+  (progn
+    (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0")
+    
+    ))
+
 ;; (use-package smooth-scrolling
 ;;   :ensure smooth-scrolling
 ;;   :config
@@ -47,6 +55,7 @@
 
 (setq-default indent-tabs-mode nil)
 
+(require 'ox-confluence)
 
 (require 'move-lines)
 (move-lines-binding)
@@ -204,10 +213,10 @@ FORCE-OTHER-WINDOW is ignored."
     
     ))
 
-(defun my-load-project-config ()
-  (message "loading file...")
-  (expand-file-name)
-  )
+;; (defun my-load-project-config ()
+;;   (message "loading file...")
+;;   (expand-file-name)
+;;   )
 
 (defun parse-csv-file (file)
   (interactive
@@ -223,6 +232,6 @@ FORCE-OTHER-WINDOW is ignored."
         (forward-line 1)))
     (reverse result)))
 
-(add-hook 'prog-mode-hook 'my-load-project-config)
+;; (add-hook 'prog-mode-hook 'my-load-project-config)
 (provide 'init-core)
 ;;;
