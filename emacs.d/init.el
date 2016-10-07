@@ -65,7 +65,7 @@
  '(company-ghc-show-info t)
  '(custom-safe-themes
    (quote
-    ("d1abda58eedee72fbe28bbb7a5ff1953e1b7d2fa80913bcea9cb3cf12cf751f4" "1bacdd5d24f187f273f488a23c977f26452dffbc82d4ac57250aa041f14159da" "b571f92c9bfaf4a28cb64ae4b4cdbda95241cd62cf07d942be44dc8f46c491f4" "6c62b1cd715d26eb5aa53843ed9a54fc2b0d7c5e0f5118d4efafa13d7715c56e" "30ba590271e63571536bcded60eca30e0645011a860be1c987fc6476c1603f15" "badc4f9ae3ee82a5ca711f3fd48c3f49ebe20e6303bba1912d4e2d19dd60ec98" default)))
+    ("bb86e64bbb372d158745c50b31254d96f7fb0cbb1bda1b3eb7a6d3d34713cf7b" "427fed191e7a766152e59ef0e2904283f436dbbe259b9ccc04989f3acde50a55" "d1abda58eedee72fbe28bbb7a5ff1953e1b7d2fa80913bcea9cb3cf12cf751f4" "1bacdd5d24f187f273f488a23c977f26452dffbc82d4ac57250aa041f14159da" "b571f92c9bfaf4a28cb64ae4b4cdbda95241cd62cf07d942be44dc8f46c491f4" "6c62b1cd715d26eb5aa53843ed9a54fc2b0d7c5e0f5118d4efafa13d7715c56e" "30ba590271e63571536bcded60eca30e0645011a860be1c987fc6476c1603f15" "badc4f9ae3ee82a5ca711f3fd48c3f49ebe20e6303bba1912d4e2d19dd60ec98" default)))
  '(gud-gdb-command-name "gdb --annotate=1")
  '(haskell-tags-on-save t)
  '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
@@ -75,7 +75,7 @@
  '(ns-use-srgb-colorspace nil)
  '(package-selected-packages
    (quote
-    (ox-reveal org-reveal dracula-theme quelpa ox-twbs smooth-scrolling smooth-scrolling-mode org-bullets org-bullets-mode swift-mode badwolf-theme monokai-theme slime ycm yalinum use-package sml-mode relative-line-numbers powerline-evil nlinum neotree nav molokai-theme moe-theme linum-relative hlinum helm-projectile helm-flycheck helm-company helm-ag flylisp flycheck-ycmd flycheck-typescript-tslint flycheck-tip flycheck-rust flycheck-package flycheck-ocaml flycheck-irony flycheck-google-cpplint flycheck-gometalinter flycheck-flow flycheck-color-mode-line flycheck-clojure flycheck-clangcheck exec-path-from-shell evil-visualstar evil-terminal-cursor-changer evil-surround evil-space evil-smartparens evil-quickscope evil-paredit evil-org evil-numbers evil-mc evil-matchit evil-magit evil-lisp-state evil-jumper evil-indent-plus evil-god-state evil-exchange evil-escape evil-ediff evil-easymotion evil-commentary evil-cleverparens evil-args elisp-slime-nav company-ycmd company-go cargo))))
+    (restclient ox-reveal org-reveal dracula-theme quelpa ox-twbs smooth-scrolling smooth-scrolling-mode org-bullets org-bullets-mode swift-mode badwolf-theme monokai-theme slime ycm yalinum use-package sml-mode relative-line-numbers powerline-evil nlinum neotree nav molokai-theme moe-theme linum-relative hlinum helm-projectile helm-flycheck helm-company helm-ag flylisp flycheck-ycmd flycheck-typescript-tslint flycheck-tip flycheck-rust flycheck-package flycheck-ocaml flycheck-irony flycheck-google-cpplint flycheck-gometalinter flycheck-flow flycheck-color-mode-line flycheck-clojure flycheck-clangcheck exec-path-from-shell evil-visualstar evil-terminal-cursor-changer evil-surround evil-space evil-smartparens evil-quickscope evil-paredit evil-org evil-numbers evil-mc evil-matchit evil-magit evil-lisp-state evil-jumper evil-indent-plus evil-god-state evil-exchange evil-escape evil-ediff evil-easymotion evil-commentary evil-cleverparens evil-args elisp-slime-nav company-ycmd company-go cargo))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -104,8 +104,8 @@
 ;; (load-theme (random-element theme-list)) 
 ;; (load-theme 'gruvbox)  
 ;(load-theme 'solarized)
-;; (load-theme 'badwolf)
-(load-theme 'dracula)
+(load-theme 'badwolf)
+;; (load-theme 'dracula)
 ;; (load-theme 'molokai)
 (powerline-reset)
 
