@@ -62,7 +62,7 @@
     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 
     (add-to-list 'evil-emacs-state-modes 'cider-mode)
-    (add-to-list 'evil-emacs-state-modes 'eshell-mode)
+    (add-to-list 'evil-insert-state-modes 'eshell-mode)
     (evil-ex-define-cmd "bd[elete]" 'kill-buffer)
 
     (require 'evil-surround)
