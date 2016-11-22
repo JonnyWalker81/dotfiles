@@ -1,5 +1,7 @@
 ;;; Code:
 
+(require 'flycheck-flow)
+
 (use-package flycheck
   :ensure flycheck
   ;; :init (add-to-list 'flycheck-checkers 'swift)
@@ -14,6 +16,8 @@
     (defvar flycheck-swift-sdk-path)
     (setq flycheck-swift-sdk-path "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator10.0.sdk")
     (add-to-list 'flycheck-checkers 'swift)
+    (add-hook 'js2-mode-hook 'flycheck-mode)
+    (flycheck-add-next-checker 'javascript-flow)
     ))
 
 (defun my-set-ios-sdk-path ()

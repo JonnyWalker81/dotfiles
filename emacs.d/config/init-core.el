@@ -1,7 +1,11 @@
 ;;; Code:
 ;; Core Miscellaneous config
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-(setq exec-path (append exec-path '("/usr/local/bin")))
+(setenv "PATH" (concat (getenv "PATH") ":/Users/jrothberg/.emacs.d/lisp/tern/bin"))
+(setq exec-path (append exec-path '("/usr/local/bin" "/Users/jrothberg/.emacs.d/lisp/tern/bin" "~/.emacs.d/lisp/tern/bin")))
+(setq exec-path (append exec-path '("~/.emacs.d/lisp/tern/bin")))
+(setq exec-path (append exec-path '("/Users/jrothberg/.emacs.d/lisp/tern/bin")))
+(setq exec-path (append exec-path '("/Users/jrothberg/.emacs.d/lisp/tern")))
 
 (when (executable-find "hunspell")
   (setq-default ispell-program-name "hunspell")

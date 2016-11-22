@@ -46,6 +46,13 @@
       (progn
         (custom-set-variables '(company-ghc-show-info t))
         ))
+
+    (use-package company-tern
+      :ensure company-tern
+      :config
+      (progn
+        (add-to-list 'company-backends 'company-tern)
+        ))
     
     ))
 

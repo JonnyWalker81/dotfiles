@@ -11,6 +11,9 @@
 (add-to-list 'load-path (concat user-emacs-directory "config"))
 (add-to-list 'load-path (concat user-emacs-directory "languages"))
 (add-to-list 'load-path (concat user-emacs-directory "lisp"))
+(add-to-list 'load-path (concat user-emacs-directory "lisp/tern"))
+(add-to-list 'load-path (concat user-emacs-directory "lisp/tern/bin"))
+(autoload 'tern-mode "tern.el" nil t)
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes"))
 (add-to-list 'load-path "/usr/share/emacs/site-lisp")
 

@@ -13,6 +13,7 @@
 (require 'init-haskell)
 (require 'init-scala)
 (require 'init-kt)
+(require 'init-javascript)
 
 (provide 'init-languages)
 ;;;

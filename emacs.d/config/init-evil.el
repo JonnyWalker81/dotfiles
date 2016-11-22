@@ -19,8 +19,8 @@
     (evil-leader/set-key
       "k" 'neotree-toggle
       "x" 'helm-M-x
-      ;; "t" 'helm-projectile-find-file
-      "t" 'helm-do-ag-project-root
+      "t" 'helm-projectile-find-file
+      ;; "t" 'helm-do-ag-project-root
       "d" 'dired
       "gs" 'magit-status
       "gt" 'rtags-find-symbol-at-point
