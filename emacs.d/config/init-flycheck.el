@@ -1,6 +1,6 @@
 ;;; Code:
 
-(require 'flycheck-flow)
+;; (require 'flycheck-flow)
 
 (use-package flycheck
   :ensure flycheck
@@ -17,7 +17,7 @@
     (setq flycheck-swift-sdk-path "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator10.0.sdk")
     (add-to-list 'flycheck-checkers 'swift)
     (add-hook 'js2-mode-hook 'flycheck-mode)
-    (flycheck-add-next-checker 'javascript-flow)
+    ;; (flycheck-add-next-checker 'javascript-eslint 'javascript-flow)
     ))
 
 (defun my-set-ios-sdk-path ()
