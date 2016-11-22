@@ -26,15 +26,7 @@
    kept-old-versions 2
    version-control t)       ; use versioned backups
 
-(use-package key-chord
-  :ensure key-chord
-  :diminish
-  :config
-  (progn
-    (setq key-chord-two-keys-delay 0.5)
-    (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
-    (key-chord-mode 1)
-    ))
+
 
 (use-package restclient
   :ensure restclient
