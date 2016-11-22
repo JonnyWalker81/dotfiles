@@ -19,7 +19,8 @@
     (evil-leader/set-key
       "k" 'neotree-toggle
       "x" 'helm-M-x
-      "t" 'helm-projectile-find-file
+      ;; "t" 'helm-projectile-find-file
+      "t" 'helm-do-ag-project-root
       "d" 'dired
       "gs" 'magit-status
       "gt" 'rtags-find-symbol-at-point
@@ -61,8 +62,10 @@
     (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 
-    (add-to-list 'evil-emacs-state-modes 'cider-repl-mode)
-    (add-to-list 'evil-insert-state-modes 'eshell-mode)
+
+    ;; (add-to-list 'evil-emacs-state-modes 'cider-mode)
+    ;; (add-to-list 'evil-insert-state-modes 'eshell-mode)
+
     (evil-ex-define-cmd "bd[elete]" 'kill-buffer)
 
     (require 'evil-surround)
@@ -108,6 +111,16 @@
 
     (use-package evil-org
       :init (add-hook 'org-mode-hook 'evil-org-mode))
+    ))
+
+(use-package key-chord
+  :ensure key-chord
+  :diminish
+  :config
+  (progn
+    (setq key-chord-two-keys-delay 0.5)
+    (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
+    (key-chord-mode 1)
     ))
 
 (provide 'init-evil)
