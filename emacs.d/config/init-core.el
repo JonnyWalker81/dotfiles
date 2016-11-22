@@ -17,6 +17,11 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 
+(org-babel-do-load-languages
+ 'org-babel-load-languages (quote ((emacs-lisp . t)
+                                    (sqlite . t)
+                                    (python . t))))
+
 (setq
    backup-by-copying t      ; don't clobber symlinks
    backup-directory-alist

@@ -12,6 +12,7 @@
 (require 'init-swift)
 (require 'init-haskell)
 (require 'init-scala)
+(require 'init-kt)
 
 (provide 'init-languages)
 ;;;

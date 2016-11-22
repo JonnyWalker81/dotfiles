@@ -20,21 +20,23 @@
 
     ;; 	(sp-local-pair 'go-mode "{" nil :post-handlers '(:add my-open-block-c-mode))
 
-	(sp-local-pair 'go-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
-	(sp-local-pair 'rust-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
-	(sp-local-pair 'groovy-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
-	(sp-local-pair 'c++-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
-	(sp-local-pair 'c-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
-	(sp-local-pair 'csharp-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
-	(sp-local-pair 'swift-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
+    (sp-local-pair 'go-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
+    (sp-local-pair 'rust-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
+    (sp-local-pair 'groovy-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
+    (sp-local-pair 'c++-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
+    (sp-local-pair 'c-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
+    (sp-local-pair 'csharp-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
+    (sp-local-pair 'swift-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
+    (sp-local-pair 'kotlin-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
+    (sp-local-pair 'javascript-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
 
 
-	(defun my-create-newline-and-enter-sexp (&rest _ignored)
-	  "Open a new brace or bracket expression, with relevant newlines and indent. "
-	  (newline)
-	  (indent-according-to-mode)
-	  (forward-line -1)
-	  (indent-according-to-mode))
+    (defun my-create-newline-and-enter-sexp (&rest _ignored)
+      "Open a new brace or bracket expression, with relevant newlines and indent. "
+      (newline)
+      (indent-according-to-mode)
+      (forward-line -1)
+      (indent-according-to-mode))
 
     ))
 

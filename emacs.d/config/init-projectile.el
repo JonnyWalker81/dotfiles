@@ -11,6 +11,15 @@
 	       (projectile-global-mode)
 	       ))
 
+(use-package perspective
+  :ensure perspective
+  :config
+  (progn
+    (persp-mode)
+    (require 'persp-projectile)
+    (define-key projectile-mode-map (kbd "C-c p") 'projectile-persp-switch-project)
+    ))
+
 
 (provide 'init-projectile)
 ;;;
