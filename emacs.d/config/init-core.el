@@ -17,6 +17,22 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 
+(setq
+   backup-by-copying t      ; don't clobber symlinks
+   backup-directory-alist
+    '(("." . "~/.saves"))    ; don't litter my fs tree
+   delete-old-versions t
+   kept-new-versions 6
+   kept-old-versions 2
+   version-control t)       ; use versioned backups
+
+(use-package restclient
+  :ensure restclient
+  :diminish
+  :config
+  (progn
+    ))
+
 (use-package ox-reveal
   :ensure ox-reveal
   :config
@@ -34,6 +50,17 @@
 
 ;; (smooth-scrolling-mode 1)
 
+(use-package dash
+  :ensure dash
+  :config
+  (progn
+    ))
+
+(use-package dash-functional
+  :ensure dash-functional
+  :config
+  (progn
+    ))
 
 (use-package smooth-scrolling
   :ensure t
@@ -45,6 +72,7 @@
 (setq-default indent-tabs-mode nil)
 
 (require 'ox-confluence)
+(require 'restclient)
 
 (require 'move-lines)
 (move-lines-binding)
@@ -206,6 +234,20 @@ FORCE-OTHER-WINDOW is ignored."
 ;;   (message "loading file...")
 ;;   (expand-file-name)
 ;;   )
+
+(defun parse-csv-file (file)
+  (interactive
+   (list (read-file-name "CSV file: ")))
+  (let ((buf (find-file-noselect file))
+        (result nil))
+    (with-current-buffer buf
+      (goto-char (point-min))
+      (while (not (eobp))
+        (let ((line (buffer-substring-no-properties
+                     (line-beginning-position) (line-end-position))))
+          (push (split-string line ",") result))
+        (forward-line 1)))
+    (reverse result)))
 
 ;; (add-hook 'prog-mode-hook 'my-load-project-config)
 (provide 'init-core)
