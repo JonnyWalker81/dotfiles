@@ -10,6 +10,9 @@
       :config
       (progn
 	))
+
+    (vc-mode-line t)
+
     ))
 
 (provide 'init-magit)

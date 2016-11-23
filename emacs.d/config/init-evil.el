@@ -20,6 +20,7 @@
       "k" 'neotree-toggle
       "x" 'helm-M-x
       "t" 'helm-projectile-find-file
+      ;; "t" 'helm-do-ag-project-root
       "d" 'dired
       "gs" 'magit-status
       "gt" 'rtags-find-symbol-at-point
@@ -28,7 +29,7 @@
       "at" 'helm-do-ag-this-file
       "o" 'find-file)
 
-    (add-hook 'prog-mode-hook
+    (add-hook 'c++-mode-hook
 	      (lambda()
 		(evil-leader/set-key
 		  "s" 'ff-find-other-file)))
@@ -61,8 +62,10 @@
     (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 
-    (add-to-list 'evil-emacs-state-modes 'cider-mode)
-    (add-to-list 'evil-insert-state-modes 'eshell-mode)
+
+    ;; (add-to-list 'evil-emacs-state-modes 'cider-mode)
+    ;; (add-to-list 'evil-insert-state-modes 'eshell-mode)
+
     (evil-ex-define-cmd "bd[elete]" 'kill-buffer)
 
     (require 'evil-surround)
@@ -82,6 +85,18 @@
 
     (add-hook 'after-make-frame-functions (lambda (frame) (my-evil-terminal-cursor-change)))
     (my-evil-terminal-cursor-change)
+
+    (evil-define-key 'normal dired-mode-map "h" 'dired-up-director)
+    (evil-define-key 'normal dired-mode-map "l" 'dired-find-alternate-file)
+    (evil-define-key 'normal dired-mode-map "o" 'dired-sort-toggle-or-edit)
+    (evil-define-key 'normal dired-mode-map "v" 'dired-toggle-marks)
+    (evil-define-key 'normal dired-mode-map "m" 'dired-mark)
+    (evil-define-key 'normal dired-mode-map "u" 'dired-unmark)
+    (evil-define-key 'normal dired-mode-map "U" 'dired-unmark-all-marks)
+    (evil-define-key 'normal dired-mode-map "c" 'dired-create-directory)
+    (evil-define-key 'normal dired-mode-map "n" 'evil-search-next)
+    (evil-define-key 'normal dired-mode-map "N" 'evil-search-previous)
+    (evil-define-key 'normal dired-mode-map "q" 'kill-this-buffer)
 
     (use-package evil-commentary
       :ensure evil-commentary
@@ -108,6 +123,16 @@
 
     (use-package evil-org
       :init (add-hook 'org-mode-hook 'evil-org-mode))
+    ))
+
+(use-package key-chord
+  :ensure key-chord
+  :diminish
+  :config
+  (progn
+    (setq key-chord-two-keys-delay 0.5)
+    (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
+    (key-chord-mode 1)
     ))
 
 (provide 'init-evil)

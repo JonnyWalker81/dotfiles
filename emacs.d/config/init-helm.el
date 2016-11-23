@@ -5,28 +5,18 @@
   :config
   
   (evil-leader/set-key
-    "b" 'helm-mini)
+    "b" 'helm-mini
+    "s" 'helm-do-grep-ag
+    "ff" 'helm-find-files)
 
   (progn
 
     (use-package helm-projectile
       :ensure helm-projectile
       :config
-      (progn
-	))
+      (progn))
 
-    (custom-set-variables
- '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
- '(helm-ag-command-option "--all-text")
- '(helm-ag-insert-at-point 'symbol))
-    
-    (use-package helm-ag
-      :ensure helm-ag
-      :config
-      (progn
-	;; (setq helm-ag-always-set-extra-option nil)
-	))
-    ))
+    (setq helm-grep-ag-command "rg --smart-case --no-heading --line-number %s %s %s")))
 
 (provide 'init-helm)
 ;;;
