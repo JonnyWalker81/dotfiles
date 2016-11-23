@@ -65,7 +65,22 @@
 (use-package django-theme :ensure t)
 (use-package distinguished-theme :ensure t)
 
-(require 'init-powerline-ab)
+;; (require 'init-powerline-ab)
+(require 'init-powerline)
+
+(use-package font-lock+
+  :ensure t)
+
+(use-package spaceline
+  :after powerline
+  :config
+  (progn
+
+    (require 'spaceline-all-the-icons)
+    (setq-default mode-line-format '("%e" (:eval (spaceline-ml-ati))))))
+
+
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -86,7 +101,7 @@
  '(ns-use-srgb-colorspace nil)
  '(package-selected-packages
    (quote
-    (parinfer kotlin-mode perspective distinguished-theme django-theme firecode-theme flatland-black-theme hipster-theme grandshell-theme gotham-theme dracula-theme quelpa ox-twbs smooth-scrolling smooth-scrolling-mode org-bullets org-bullets-mode swift-mode badwolf-theme monokai-theme slime ycm yalinum use-package sml-mode relative-line-numbers powerline-evil nlinum neotree nav molokai-theme moe-theme linum-relative hlinum helm-projectile helm-flycheck helm-company helm-ag flylisp flycheck-ycmd flycheck-typescript-tslint flycheck-tip flycheck-rust flycheck-package flycheck-ocaml flycheck-irony flycheck-google-cpplint flycheck-gometalinter flycheck-flow flycheck-color-mode-line flycheck-clojure flycheck-clangcheck exec-path-from-shell evil-visualstar evil-terminal-cursor-changer evil-surround evil-space evil-smartparens evil-quickscope evil-paredit evil-org evil-numbers evil-mc evil-matchit evil-magit evil-lisp-state evil-jumper evil-indent-plus evil-god-state evil-exchange evil-escape evil-ediff evil-easymotion evil-commentary evil-cleverparens evil-args elisp-slime-nav company-ycmd company-go cargo))))
+    (spaceline-all-the-icons parinfer kotlin-mode perspective distinguished-theme django-theme firecode-theme flatland-black-theme hipster-theme grandshell-theme gotham-theme dracula-theme quelpa ox-twbs smooth-scrolling smooth-scrolling-mode org-bullets org-bullets-mode swift-mode badwolf-theme monokai-theme slime ycm yalinum use-package sml-mode relative-line-numbers powerline-evil nlinum neotree nav molokai-theme moe-theme linum-relative hlinum helm-projectile helm-flycheck helm-company helm-ag flylisp flycheck-ycmd flycheck-typescript-tslint flycheck-tip flycheck-rust flycheck-package flycheck-ocaml flycheck-irony flycheck-google-cpplint flycheck-gometalinter flycheck-flow flycheck-color-mode-line flycheck-clojure flycheck-clangcheck exec-path-from-shell evil-visualstar evil-terminal-cursor-changer evil-surround evil-space evil-smartparens evil-quickscope evil-paredit evil-org evil-numbers evil-mc evil-matchit evil-magit evil-lisp-state evil-jumper evil-indent-plus evil-god-state evil-exchange evil-escape evil-ediff evil-easymotion evil-commentary evil-cleverparens evil-args elisp-slime-nav company-ycmd company-go cargo))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -126,8 +141,9 @@
 ;; (load-theme 'django)
 (load-theme 'distinguished)
 ;; (load-theme 'molokai)
-(powerline-reset)
+;; (powerline-reset)
 
 (provide 'init)
 
 ;;;
+(put 'dired-find-alternate-file 'disabled nil)

@@ -86,6 +86,18 @@
     (add-hook 'after-make-frame-functions (lambda (frame) (my-evil-terminal-cursor-change)))
     (my-evil-terminal-cursor-change)
 
+    (evil-define-key 'normal dired-mode-map "h" 'dired-up-director)
+    (evil-define-key 'normal dired-mode-map "l" 'dired-find-alternate-file)
+    (evil-define-key 'normal dired-mode-map "o" 'dired-sort-toggle-or-edit)
+    (evil-define-key 'normal dired-mode-map "v" 'dired-toggle-marks)
+    (evil-define-key 'normal dired-mode-map "m" 'dired-mark)
+    (evil-define-key 'normal dired-mode-map "u" 'dired-unmark)
+    (evil-define-key 'normal dired-mode-map "U" 'dired-unmark-all-marks)
+    (evil-define-key 'normal dired-mode-map "c" 'dired-create-directory)
+    (evil-define-key 'normal dired-mode-map "n" 'evil-search-next)
+    (evil-define-key 'normal dired-mode-map "N" 'evil-search-previous)
+    (evil-define-key 'normal dired-mode-map "q" 'kill-this-buffer)
+
     (use-package evil-commentary
       :ensure evil-commentary
       :config

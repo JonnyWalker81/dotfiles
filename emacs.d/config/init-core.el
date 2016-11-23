@@ -1,4 +1,4 @@
-;;; Code:
+;; Code:
 ;; Core Miscellaneous config
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setenv "PATH" (concat (getenv "PATH") ":/Users/jrothberg/.emacs.d/lisp/tern/bin"))
@@ -7,6 +7,12 @@
 (setq exec-path (append exec-path '("/Users/jrothberg/.emacs.d/lisp/tern/bin")))
 (setq exec-path (append exec-path '("/Users/jrothberg/.emacs.d/lisp/tern")))
 
+(require 'dired-x)
+(require 'dired+)
+
+(setq diredp-toggle-find-file-reuse-dir 1)
+(setq diredp-hide-details-toggled -1)
+      
 (when (executable-find "hunspell")
   (setq-default ispell-program-name "hunspell")
   (setq ispell-really-hunspell t))
@@ -17,9 +23,9 @@
 ;; Below line specify the ACTUAL dictionary we use
 (setq ispell-extra-args '("-d en_US"))
 
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode 1)
+;; (setq ido-enable-flex-matching t)
+;; (setq ido-everywhere t)
+;; (ido-mode 1)
 
 (org-babel-do-load-languages
  'org-babel-load-languages (quote ((emacs-lisp . t)
@@ -237,9 +243,9 @@ FORCE-OTHER-WINDOW is ignored."
 (use-package multiple-cursors
   :ensure multiple-cursors
   :config
-  (progn
+  (progn))
     
-    ))
+    
 
 ;; (defun my-load-project-config ()
 ;;   (message "loading file...")
@@ -261,5 +267,51 @@ FORCE-OTHER-WINDOW is ignored."
     (reverse result)))
 
 ;; (add-hook 'prog-mode-hook 'my-load-project-config)
+
+;; Ivy Node
+(use-package swiper
+  :ensure t
+  :bind*
+  (("C-s" . swiper)
+   ("C-c C-r" . ivy-resume)
+   ("C-x C-f" . counsel-find-file)
+   ("C-c h f" . counsel-describe-function)
+   ("C-c h v" . counsel-describe-variable)
+   ("C-c i u" . counsel-unicode-char)
+   ("M-i" . counsel-imenu)
+   ("C-c g" . counsel-git)
+   ("C-c j" . counsel-git-grep)
+   ("C-c k" . counsel-ag)
+   ("C-c l" . scounsel-locate))
+  :config
+  (progn
+    (ivy-mode 1)
+    (setq ivy-use-virtual-buffers t)
+    (define-key read-expression-map (kbd "C-r") #'counsel-expression-history)
+    (ivy-set-actions
+     'counsel-find-file
+     '(("d" (lambda (x) (delete-file (expand-file-name x)))
+        "delete")))
+    
+    (ivy-set-actions
+     'ivy-switch-buffer
+     '(("k"
+        (lambda (x)
+          (kill-buffer x)
+          (ivy--reset-state ivy-last))
+        "kill")
+       ("j"
+        ivy--switch-buffer-other-window-action
+        "other window")))))
+
+(use-package counsel-projectile
+  :ensure t
+  :config
+  (counsel-projectile-on))
+
+(use-package ivy-hydra :ensure t)
+
+(setq dired-use-ls-dired nil)
+
 (provide 'init-core)
 ;;;
