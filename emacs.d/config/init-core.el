@@ -25,6 +25,11 @@
     
     ))
 
+(use-package ripgrep
+  :ensure ripgrep
+  :config
+  (progn
+    ))
 ;; (use-package smooth-scrolling
 ;;   :ensure smooth-scrolling
 ;;   :config
