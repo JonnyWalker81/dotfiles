@@ -71,6 +71,7 @@
 (require 'yahoo-weather)
 (yahoo-weather-mode 1)
 (setq yahoo-weather-location "91101")
+(setq yahoo-weather-use-F t)
 (use-package font-lock+
   :ensure t)
 

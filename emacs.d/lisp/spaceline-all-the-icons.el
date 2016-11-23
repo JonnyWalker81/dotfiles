@@ -215,7 +215,7 @@
 (defun spaceline--get-temp ()
   "Function to return the Temperature formatted for ATI Spacline."
   (let ((temp (yahoo-weather-info-format yahoo-weather-info "%(temperature)")))
-    (unless (string= "" temp) (format "%s°C" (round (string-to-number temp))))))
+    (unless (string= "" temp) (format "%s°F" (round (string-to-number temp))))))
 
 (spaceline-define-segment
     ati-weather "Weather"
@@ -233,7 +233,7 @@
        (propertize " " 'help-echo help)
        (propertize (spaceline--get-temp) 'face '(:height 0.9 :inherit) 'help-echo help)))
     :when (and active (boundp 'yahoo-weather-info) yahoo-weather-mode)
-    :enabled nil
+    :enabled t
     :tight t)
 
 (spaceline-define-segment
@@ -258,7 +258,7 @@
     (let* ((hour (string-to-number (format-time-string "%I")))
            (icon (all-the-icons-wicon (format "time-%s" hour) :v-adjust 0.0)))
       (concat
-       (propertize (format-time-string "%H:%M ") 'face `(:height 0.9 :inherit) 'display '(raise 0.1))
+       (propertize (format-time-string "%I:%M ") 'face `(:height 0.9 :inherit) 'display '(raise 0.1))
        (propertize (format "%s" icon)
                    'face `(:height 0.8 :family ,(all-the-icons-wicon-family) :inherit)
                    'display '(raise 0.1))))
