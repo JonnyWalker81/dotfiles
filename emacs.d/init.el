@@ -68,6 +68,7 @@
 ;; (require 'init-powerline-ab)
 (require 'init-powerline)
 
+(require 'yahoo-weather)
 (use-package font-lock+
   :ensure t)
 
@@ -129,17 +130,17 @@
 
 ;; (load-theme (random-element theme-list)) 
 ;; (load-theme 'gruvbox)  
-;(load-theme 'solarized)
+                                        ;(load-theme 'solarized)
 ;; (load-theme 'badwolf)
 ;; (load-theme 'dracula)
 ;; (load-theme 'badwolf)
 ;; (load-theme 'dracula)
-;; (load-theme 'gotham)
+(load-theme 'gotham)
 ;; (load-theme 'grandshell)
 ;; (load-theme 'flatland-black)
 ;; (load-theme 'firecode)
 ;; (load-theme 'django)
-(load-theme 'distinguished)
+;; (load-theme 'distinguished)
 ;; (load-theme 'molokai)
 ;; (powerline-reset)
 
