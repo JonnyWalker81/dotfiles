@@ -69,6 +69,8 @@
 (require 'init-powerline)
 
 (require 'yahoo-weather)
+(yahoo-weather-mode 1)
+(setq yahoo-weather-location "91101")
 (use-package font-lock+
   :ensure t)
 
