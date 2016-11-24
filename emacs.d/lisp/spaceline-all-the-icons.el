@@ -266,7 +266,7 @@
 
 (spaceline-define-segment
     ati-height-modifier "Modifies the height of inactive buffers"
-    (propertize " " 'face '(:height 1.3 :inherit))
+    (propertize " " 'face '(:height 1.5 :inherit))
     :tight t :when (not active))
 
 (spaceline-define-segment

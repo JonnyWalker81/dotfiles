@@ -12,7 +12,28 @@
 
 (setq diredp-toggle-find-file-reuse-dir 1)
 (setq diredp-hide-details-toggled -1)
-      
+
+
+(require 'cl)
+(setq tls-checktrust t)
+
+(setq python (or (executable-find "py.exe")
+                 (executable-find "python")))
+                 
+
+(let ((trustfile
+       (replace-regexp-in-string
+        "\\\\" "/"
+        (replace-regexp-in-string
+         "\n" ""
+         (shell-command-to-string (concat python " -m certifi"))))))
+  (setq tls-program
+        (list
+         (format "gnutls-cli%s --x509cafile %s -p %%p %%h"
+                 (if (eq window-system 'w32) ".exe" "") trustfile)))
+  (setq gnutls-verify-error t)
+  (setq gnutls-trustfiles (list trustfile)))
+
 (when (executable-find "hunspell")
   (setq-default ispell-program-name "hunspell")
   (setq ispell-really-hunspell t))
