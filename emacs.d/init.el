@@ -65,6 +65,11 @@
 (use-package django-theme :ensure t)
 (use-package distinguished-theme :ensure t)
 (use-package naquadah-theme :ensure t)
+(use-package arjen-grey-theme
+  :ensure t
+  :config
+  (load-theme 'arjen-grey t))
+
 
 ;; (require 'init-powerline-ab)
 (require 'init-powerline)
@@ -143,7 +148,7 @@
 ;; (load-theme 'grandshell)
 ;; (load-theme 'flatland-black)
 ;; (load-theme 'firecode)
-(load-theme 'naquadah)
+;; (load-theme 'naquadah)
 ;; (load-theme 'django)
 ;; (load-theme 'distinguished)
 ;; (load-theme 'molokai)
