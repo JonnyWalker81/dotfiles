@@ -313,6 +313,7 @@ FORCE-OTHER-WINDOW is ignored."
   (progn
     (ivy-mode 1)
     (setq ivy-use-virtual-buffers t)
+    (setq ivy-display-style 'fancy)
     (define-key read-expression-map (kbd "C-r") #'counsel-expression-history)
     (ivy-set-actions
      'counsel-find-file
