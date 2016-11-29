@@ -11,7 +11,8 @@
   (setq package-archives '(("melpa" . "http://melpa.org/packages/")
                            ("org" . "http://orgmode.org/elpa/")
                            ("gnu" . "http://elpa.gnu.org/packages/")
-			   ("marmalade" . "http://marmalade-repo.org/packages/")))
+			   ;; ("marmalade" . "http://marmalade-repo.org/packages/")
+                           ))
 
 
   (setq package-enable-at-startup nil)
@@ -58,12 +59,9 @@
 
   ;; (require 'init-powerline-ab)
 
-    (use-package arjen-grey-theme
-        :ensure t
-        :config
-        (load-theme 'arjen-grey t))
 
   (require 'init-powerline)
+  ;; (require 'init-mode-line)
   (require 'yahoo-weather)
   (yahoo-weather-mode 1)
   (setq yahoo-weather-location "91101")
@@ -79,8 +77,14 @@
       (require 'spaceline-all-the-icons)
       (setq-default mode-line-format '("%e" (:eval (spaceline-ml-ati))))))
 
+    ;; (set-face-foreground 'minibuffer-prompt "white")
 
+    (use-package arjen-grey-theme
+        :ensure t
+        :config
+        (load-theme 'arjen-grey t))
 
+    (set-face-background 'minibuffer-prompt nil)
 
   (custom-set-variables
    ;; custom-set-variables was added by Custom.

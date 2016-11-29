@@ -313,12 +313,24 @@ FORCE-OTHER-WINDOW is ignored."
   (progn
     (ivy-mode 1)
     (setq ivy-use-virtual-buffers t)
-    (setq ivy-display-style 'fancy)
+    (setq ivy-display-style nil)
     (define-key read-expression-map (kbd "C-r") #'counsel-expression-history)
     (ivy-set-actions
      'counsel-find-file
      '(("d" (lambda (x) (delete-file (expand-file-name x)))
         "delete")))
+
+    ;; (setq swiper-min-highlight nil)
+    ;; (set-face-attribute 'ivy-minibuffer-match-face-1 nil
+    ;;                     :background nil
+    ;;                     :inherit 'default)
+    
+    ;; (custom-set-faces
+    ;;  '(ivy-current-match
+    ;;    ((((class color) (background light))
+    ;;      :background "red" :foreground "white")
+    ;;     (((class color) (background dark))
+    ;;      :background "blue" :foreground "black"))))
     
     (ivy-set-actions
      'ivy-switch-buffer
