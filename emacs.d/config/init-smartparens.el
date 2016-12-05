@@ -29,6 +29,8 @@
     (sp-local-pair 'swift-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
     (sp-local-pair 'kotlin-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
     (sp-local-pair 'javascript-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
+    (sp-local-pair 'js2-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
+    (sp-local-pair 'tern-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
 
 
     (defun my-create-newline-and-enter-sexp (&rest _ignored)

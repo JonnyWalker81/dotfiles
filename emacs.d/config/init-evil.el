@@ -24,10 +24,12 @@
       "d" 'dired
       "gs" 'magit-status
       "gt" 'rtags-find-symbol-at-point
-      "e" 'eshell
+      "e" 'eshell-here
       "ag" 'helm-projectile-ag
       "at" 'helm-do-ag-this-file
-      "o" 'find-file)
+      "o" 'find-file
+      "n" 'new-org-note
+      )
 
     (add-hook 'c++-mode-hook
 	      (lambda()
@@ -132,6 +134,7 @@
   (progn
     (setq key-chord-two-keys-delay 0.5)
     (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
+    (key-chord-define evil-insert-state-map "ii" 'evil-normal-state)
     (key-chord-mode 1)
     ))
 

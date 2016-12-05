@@ -352,5 +352,68 @@ FORCE-OTHER-WINDOW is ignored."
 
 (setq dired-use-ls-dired nil)
 
+(defun eshell-here ()
+  "Opens up a new shell in the directory associated with the
+current buffer's file. The eshell is renamed to match that
+directory to make multiple eshell windows easier."
+  (interactive)
+  (let* ((parent (if (buffer-file-name)
+                     (file-name-directory (buffer-file-name))
+                   default-directory))
+         (name   (car (last (split-string parent "/" t)))))
+    (split-window-horizontally)
+    (other-window 1)
+    (eshell "new")
+    (rename-buffer (concat "*eshell: " name "*"))
+
+    (insert (concat "ls"))
+    (eshell-send-input)))
+
+(defun eshell/x ()
+  (insert "exit")
+  (eshell-send-input)
+  (delete-window))
+
+(defun insert-blank-line ()
+  "Inserts a blank line."
+  (interactive)
+  (push (point) buffer-undo-list)
+  (evil-insert-newline-below)
+  (setq evil-insert-lines t
+        evil-insert-vcount nil)
+  ;; (evil-insert-state 1)
+  ;; (add-hook 'post-command-hook #'evil-maybe-remove-spaces)
+  ;; (when evil-auto-indent
+  ;;   (indent-according-to-mode))
+  )
+
+(defun new-org-note (file-name)
+  "Create a new note in the Dropbox folder."
+  (interactive "sName:")
+  (let ((buffer (generate-new-buffer (format "~/Dropbox/Notes/%s.org" file-name))))
+    (switch-to-buffer buffer)
+    (write-file (format "~/Dropbox/Notes/%s.org" file-name))
+    )
+  )
+
+(defun new-txt-note (file-name)
+  "Create a new note in the Dropbox folder."
+  (interactive "sName:")
+  (let ((buffer (generate-new-buffer (format "~/Dropbox/Notes/%s.txt" file-name))))
+    (switch-to-buffer buffer)
+    (write-file (format "~/Dropbox/Notes/%s.txt" file-name))
+    )
+  )
+
+(defun new-txt-document (file-name)
+  "Create a new note in the Dropbox folder."
+  (interactive "sName:")
+  (let ((buffer (generate-new-buffer (format "~/Documents/%s.txt" file-name))))
+    (switch-to-buffer buffer)
+    (write-file (format "~/Documents/%s.txt" file-name))
+    )
+  )
+
 (provide 'init-core)
-;;;
+;;;Attempt to delete minibuffer or sole ordinary window
+

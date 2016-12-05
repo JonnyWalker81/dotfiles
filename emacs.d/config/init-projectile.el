@@ -1,15 +1,21 @@
 ;;; Code:
 
 (use-package projectile
-	     :ensure projectile
-	     :config
-	     (progn
-	       (projectile-mode t)
+  :ensure projectile
+  :config
+  (progn
+    (projectile-mode t)
 
-	       (setq projectile-enable-caching t)
-	       (setq projectile-globally-ignored-directories (append '("node_modules" ".svn" ".git") projectile-globally-ignored-directories))
-	       (projectile-global-mode)
-	       ))
+    (setq projectile-enable-caching t)
+    (setq projectile-globally-ignored-directories (append '("node_modules" ".svn" ".git") projectile-globally-ignored-directories))
+    (projectile-global-mode)
+
+    (use-package projectile-ripgrep
+      :ensure projectile-ripgrep
+      :config
+      (progn
+        ))
+    ))
 
 (use-package perspective
   :ensure perspective
