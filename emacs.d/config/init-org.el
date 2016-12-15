@@ -27,6 +27,11 @@
 (setq org-src-tab-acts-natively t)
 (setq org-html-checkbox-type 'html)
 
+(defun open-todo-list ()
+  (interactive)
+  (find-file "~/Dropbox/Notes/Org/Todo.org"))
+
+
 ;; Point to plantuml.jar, for example:
 (setq org-plantuml-jar-path "~/Downloads/plantuml.jar")
 
@@ -39,6 +44,7 @@
 
 
 (setq org-log-done 'time)
+(setq org-agenda-files '("~/Dropbox/Notes/Org"))
 
 ;; Disable confirmation question when evaluating (C-c C-c) these languages
 (defun my-org-confirm-babel-evaluate (lang body)
@@ -57,6 +63,14 @@
 ;; Sensible header default arguments for PlantUML
 (setq org-babel-default-header-args:PlantUML
       '((:results . "file") (:exports . "results") (:noweb . "yes") (:cmdline . "-charset UTF-8")))
+
+(setq org-directory "~/Dropbox/Notes/Org")
+
+(setq org-capture-templates
+      '(("a" "My TODO task format." entry
+         (file "Todo.org")
+         "** TODO %?
+SCHEDULED: %t")))
 
 (provide 'init-org)
 ;;;

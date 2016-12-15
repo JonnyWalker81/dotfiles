@@ -414,6 +414,7 @@ directory to make multiple eshell windows easier."
     )
   )
 
+
 (provide 'init-core)
 ;;;Attempt to delete minibuffer or sole ordinary window
 

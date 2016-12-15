@@ -29,6 +29,9 @@
       "at" 'helm-do-ag-this-file
       "o" 'find-file
       "n" 'new-org-note
+      "u" 'new-txt-document
+      "ww" 'open-todo-list
+      "cc" 'org-capture
       )
 
     (add-hook 'c++-mode-hook
@@ -123,8 +126,8 @@
 	(define-key evil-normal-state-map "K" 'evil-jump-out-args)
 	))
 
-    (use-package evil-org
-      :init (add-hook 'org-mode-hook 'evil-org-mode))
+    ;; (use-package evil-org
+    ;;   :init (add-hook 'org-mode-hook 'evil-org-mode))
     ))
 
 (use-package key-chord
