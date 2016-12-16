@@ -22,8 +22,9 @@
       :ensure helm-ag
       :config
       (progn
-        (setq helm-ag-base-command "rg --smart-case --no-heading --line-number --vimgrep")
-        (setq helm-ag-insert-at-point nil)))))
+        (setq helm-ag-insert-at-point nil)
+        (setq helm-ag-base-command "rg --smart-case --no-heading --line-number --vimgrep")))))
+        
         
 
 (provide 'init-helm)
