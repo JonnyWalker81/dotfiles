@@ -66,6 +66,8 @@
     (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
     (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+    (define-key evil-normal-state-map (kbd "C-e") 'emmet-expand-line)
+    (define-key evil-insert-state-map (kbd "C-e") 'emmet-expand-line)
 
 
     ;; (add-to-list 'evil-emacs-state-modes 'cider-mode)
