@@ -109,6 +109,20 @@
   :ensure t
   :config (setq smooth-scroll-margin 2)
   :init (smooth-scrolling-mode 1))
+
+
+(use-package emmet-mode
+  :ensure emmet-mode
+  :config
+  (progn
+    (add-hook 'clojure-mode-hook 'emmet-mode)
+    (add-hook 'clojurescript-mode-hook 'emmet-mode)
+    (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+    (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+    (setq emmet-move-cursor-between-quotes t)
+    (setq emmet-expand-jsx-className? t)
+    ))
+
 (setq mouse-wheel-scroll-amount '(1 ((shift) .1) ((control) . nil)))
 (setq mouse-wheel-progressive-speed nil)
 
