@@ -28,7 +28,9 @@
     (sp-local-pair 'csharp-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
     (sp-local-pair 'swift-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
     (sp-local-pair 'kotlin-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
+    ;; (sp-local-pair 'kotlin-mode "{" nil :post-handlers nil)
     (sp-local-pair 'javascript-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
+    (sp-local-pair 'java-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
     (sp-local-pair 'js2-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
     (sp-local-pair 'tern-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
 

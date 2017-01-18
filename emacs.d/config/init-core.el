@@ -7,12 +7,16 @@
 (setq exec-path (append exec-path '("/Users/jrothberg/.emacs.d/lisp/tern/bin")))
 (setq exec-path (append exec-path '("/Users/jrothberg/.emacs.d/lisp/tern")))
 
+(setenv "RLS_ROOT" "~/Repositories/rls")
+
 (require 'dired-x)
 (require 'dired+)
 
 (setq diredp-toggle-find-file-reuse-dir 1)
 (setq diredp-hide-details-toggled -1)
 
+(setq eshell-highlight-prompt nil)
+(setq eshell-ls-use-colors t)
 
 (require 'cl)
 (setq tls-checktrust t)
@@ -62,7 +66,37 @@
    kept-old-versions 2
    version-control t)       ; use versioned backups
 
+;; (use-package lsp-mode
+;;   :ensure lsp-mode
+;;   :diminish
+;;   :config
+;;   (progn
+;;     (global-lsp-mode 1)
+;;     ))
 
+(use-package visual-regexp
+  :ensure visual-regexp
+  :diminish
+  :config
+  (progn
+
+    (use-package visual-regexp-steroids
+      :ensure visual-regexp-steroids
+      :diminish
+      :config
+      (progn 
+        ))
+    
+    (define-key global-map (kbd "C-c r") 'vr/replace)
+    (define-key global-map (kbd "C-c q") 'vr/query-replace)
+    ;; if you use multiple-cursors, this is for you:
+    (define-key global-map (kbd "C-c m") 'vr/mc-mark)
+    ;; to use visual-regexp-steroids's isearch instead of the built-in regexp isearch, also include the following lines:
+    ;; (define-key esc-map (kbd "C-r") 'vr/isearch-backward) ;; C-M-r
+    ;; (define-key esc-map (kbd "C-r") 'vr/isearch-backward) ;; C-M-r
+    (define-key global-map (kbd "C-s") 'vr/isearch-forward) ;; C-M-s
+    (define-key global-map (kbd "C-s") 'vr/isearch-forward) ;; C-M-s
+    ))
 
 (use-package restclient
   :ensure restclient
@@ -139,7 +173,7 @@
 ;; (setq compilation-scroll-output 'first-error)
 
 (require 'whitespace)
-(setq whitespace-line-column 80) ;; limit line length
+(setq whitespace-line-column 120) ;; limit line length
 (setq whitespace-style '(face lines-tail))
 
 (add-hook 'prog-mode-hook 'whitespace-mode)
@@ -312,7 +346,8 @@ FORCE-OTHER-WINDOW is ignored."
 (use-package swiper
   :ensure t
   :bind*
-  (("C-s" . swiper)
+  (
+   ("C-c C-s" . swiper)
    ("C-c C-r" . ivy-resume)
    ("C-x C-f" . counsel-find-file)
    ("C-c h f" . counsel-describe-function)
@@ -375,7 +410,9 @@ directory to make multiple eshell windows easier."
                      (file-name-directory (buffer-file-name))
                    default-directory))
          (name   (car (last (split-string parent "/" t)))))
-    (split-window-horizontally)
+    (when (= (length (window-list)) 1)
+      (split-window-horizontally))
+    ;; (split-window-horizontally)
     (other-window 1)
     (eshell "new")
     (rename-buffer (concat "*eshell: " name "*"))
@@ -428,6 +465,87 @@ directory to make multiple eshell windows easier."
     )
   )
 
+(setq eshell-history-size 1024)
+(setq eshell-prompt-regexp "^[^#$]*[#$] ")
+
+(load "em-hist")           ; So the history vars are defined
+(if (boundp 'eshell-save-history-on-exit)
+    (setq eshell-save-history-on-exit t)) ; Don't ask, just save
+;(message "eshell-ask-to-save-history is %s" eshell-ask-to-save-history)
+(if (boundp 'eshell-ask-to-save-history)
+    (setq eshell-ask-to-save-history 'always)) ; For older(?) version
+;(message "eshell-ask-to-save-history is %s" eshell-ask-to-save-history)
+
+(defun eshell/ef (fname-regexp &rest dir) (ef fname-regexp default-directory))
+
+
+;;; ---- path manipulation
+
+(defun pwd-repl-home (pwd)
+  (interactive)
+  (let* ((home (expand-file-name (getenv "HOME"))))
+   (home-len (length home)
+    (if (and)))
+   (>= (length pwd) home-len)
+   (equal home (substring pwd 0 home-len)))
+  (concat "~" (substring pwd home-len)
+      pwd))
+
+(defun curr-dir-git-branch-string (pwd)
+  "Returns current git branch as a string, or the empty string if
+PWD is not in a git repo (or the git command is not found)."
+  (interactive)
+  (when (and (eshell-search-path "git")
+             (locate-dominating-file pwd ".git"))
+    (let ((git-output (shell-command-to-string (concat "cd " pwd " && git branch | grep '\\*' | sed -e 's/^\\* //'"))))
+      (propertize (concat "[")
+                  (if (> (length git-output) 0)
+                      (substring git-output 0 -1)
+                    "(no branch)")
+                  "]") 'face `(:foreground "green"))))
+      
+
+;; (setq eshell-prompt-function
+;;       (lambda ()
+;;         (concat
+;;          (propertize ((lambda (p-lst)))
+;;             (if (> (length p-lst) 3)
+;;                 (concat
+;;                  (mapconcat (lambda (elm) (if (zerop (length elm)) ""
+;;                                             (substring elm 0 1)))
+;;                             (butlast p-lst 3)
+;;                             "/")
+;;                  "/"
+;;                  (mapconcat (lambda (elm) elm)
+;;                             (last p-lst 3)
+;;                             "/"))
+;;               (mapconcat (lambda (elm) elm)
+;;                          p-lst
+;;                          "/"))
+;;           (split-string (pwd-repl-home (eshell/pwd)) "/")) 'face `(:foreground "yellow")
+;;          (or (curr-dir-git-branch-string (eshell/pwd)))
+;;          (propertize "# " 'face 'default))))
+
+;; (setq eshell-prompt-function
+;;       (lambda()
+;;         (concat (getenv "USER") "@" (getenv "HOST") ":"
+;;                 ((lambda (p-lst)
+;;                    (if (> (length p-lst) 3)
+;;                        (concat
+;;                         (mapconcat (lambda (elm) (substring elm 0 1))
+;;                                    (butlast p-lst (- (length p-lst) 3))
+;;                                    "/")
+;;                         "/"
+;;                         (mapconcat (lambda (elm) elm)
+;;                                    (last p-lst (- (length p-lst) 3))
+;;                                    "/"))
+;;                      (mapconcat (lambda (elm) elm)
+;;                                 p-lst
+;;                                 "/")))
+;;                  (split-string (eshell/pwd) "/"))
+;;                 (if (= (user-uid) 0) " # " " $ "))))
+
+(setq eshell-highlight-prompt nil)
 
 (provide 'init-core)
 ;;;Attempt to delete minibuffer or sole ordinary window

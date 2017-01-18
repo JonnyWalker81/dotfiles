@@ -12,7 +12,7 @@
     (add-hook 'rust-mode-hook #'racer-mode)
     (add-hook 'racer-mode-hook #'eldoc-mode)
     (setq racer-cmd "~/.cargo/bin/racer")
-    (setq racer-rust-src-path "~/Downloads/rustc-nightly/src")
+    (setq racer-rust-src-path "~/.rustup/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust/src")
 
     (use-package cargo
       :ensure cargo

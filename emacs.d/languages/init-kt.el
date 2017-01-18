@@ -3,6 +3,7 @@
   :config
   (progn
 
+    ;; (setq kotlin-tab-width 4)
     ))
 
 (provide 'init-kt)

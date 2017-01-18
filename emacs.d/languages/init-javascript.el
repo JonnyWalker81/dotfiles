@@ -2,6 +2,8 @@
 ;;; Code:
 ;;; Commentary:
 
+(require 'prettier-js)
+
 (use-package js2-mode
   :ensure js2-mode
   :config
@@ -9,7 +11,11 @@
     (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
     (add-to-list 'auto-mode-alist '("\\.jsx$\\'" . js2-jsx-mode))
     (add-to-list 'interpreter-mode-alist '("node" . js2-jsx-mode))
-    (add-hook 'js2-mode-hook (lambda () (tern-mode t)))))
+    (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
+    (setq prettier-width-mode 'fill)
+    ;; (add-hook 'js2-mode-hook (lambda () (add-hook 'before-save-hook 'prettier-before-save)))
+    ;; (add-hook 'js-mode-hook (lambda () (add-hook 'before-save-hook 'prettier-before-save)))
+    ))
 
 (use-package jade
   :ensure jade
