@@ -12,6 +12,118 @@
 (require 'dired-x)
 (require 'dired+)
 
+(require 'fic-mode)
+(add-hook 'prog-mode-hook 'fic-mode)
+
+(defun my/dired-mode-hook ()
+  ""
+  (toggle-truncate-lines 1))
+
+(use-package dired
+  :bind ("C-x C-j" . dired-jump)
+  :config
+  (use-package dired-x
+    :init (setq-default dired-omit-files-p t)
+    :config
+    (add-to-list 'dired-omit-extensions ".DS_Store"))
+  (customize-set-variable 'diredp-hide-details-initially-flag nil)
+  (use-package dired+
+    :ensure t)
+  (use-package dired-aux
+    :init
+    (use-package dired-async
+      :ensure async))
+  (put 'dired-find-alternate-file 'disabled nil)
+  (setq ls-lisp-dirs-first t
+        dired-recursive-copies 'always
+        dired-recursive-deletes 'always
+        dired-dwim-target t
+        ;; -F marks links with @
+        dired-ls-F-marks-symlinks t
+        delete-by-moving-to-trash t
+        ;; Auto refresh dired
+        global-auto-revert-non-file-buffers t
+        wdired-allow-to-change-permissions t)
+  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+  (define-key dired-mode-map (kbd "C-M-u") 'dired-up-directory)
+  (define-key dired-mode-map (kbd "M-o") #'my/dired-open)
+  (define-key dired-mode-map (kbd "C-x C-q") 'wdired-change-to-wdired-mode)
+  (bind-key "l" #'dired-up-directory dired-mode-map)
+  (bind-key "M-!" #'async-shell-command dired-mode-map)
+  (add-hook 'dired-mode-hook #'hl-line-mode)
+  (add-hook 'dired-mode-hook #'my/dired-mode-hook))
+
+
+(use-package saveplace
+  :ensure saveplace
+  :defer t
+  :init
+  (setq-default save-place t)
+  (setq save-place-file (expand-file-name ".places" user-emacs-directory)))
+
+;; recentf
+
+;; Set up keeping track of recent files, up to 2000 of them.
+;; If emacs has been idle for 10 minutes, clean up the recent files. Also save the list of recent files every 5 minutes.
+
+;; This also only enables recentf-mode if idle, so that emacs starts up faster.
+(use-package recentf
+  :defer 10
+  :commands (recentf-mode
+             recentf-add-file
+             recentf-apply-filename-handlers)
+  :init
+  (setq recentf-max-saved-items 300
+        recentf-exclude '("/auto-install/" ".recentf" "/repos/" "/elpa/"
+                          "\\.mime-example" "\\.ido.last" "COMMIT_EDITMSG"
+                          ".gz"
+                          "~$" "/tmp/" "/ssh:" "/sudo:" "/scp:")
+        recentf-auto-cleanup 600)
+  (when (not noninteractive) (recentf-mode 1))
+
+  (defun recentf-save-list ()
+    "Save the recent list.
+Load the list from the file specified by `recentf-save-file',
+merge the changes of your current session, and save it back to
+the file."
+    (interactive)
+    (let ((instance-list (cl-copy-list recentf-list)))
+      (recentf-load-list)
+      (recentf-merge-with-default-list instance-list)
+      (recentf-write-list-to-file)))
+
+  (defun recentf-merge-with-default-list (other-list)
+    "Add all items from `other-list' to `recentf-list'."
+    (dolist (oitem other-list)
+      ;; add-to-list already checks for equal'ity
+      (add-to-list 'recentf-list oitem)))
+
+  (defun recentf-write-list-to-file ()
+    "Write the recent files list to file.
+Uses `recentf-list' as the list and `recentf-save-file' as the
+file to write to."
+    (condition-case error
+        (with-temp-buffer
+          (erase-buffer)
+          (set-buffer-file-coding-system recentf-save-file-coding-system)
+          (insert (format recentf-save-file-header (current-time-string)))
+          (recentf-dump-variable 'recentf-list recentf-max-saved-items)
+          (recentf-dump-variable 'recentf-filter-changer-current)
+          (insert "\n \n;;; Local Variables:\n"
+                  (format ";;; coding: %s\n" recentf-save-file-coding-system)
+                  ";;; End:\n")
+          (write-file (expand-file-name recentf-save-file))
+          (when recentf-save-file-modes
+            (set-file-modes recentf-save-file recentf-save-file-modes))
+          nil)
+      (error
+       (warn "recentf mode: %s" (error-message-string error)))))
+  (recentf-mode 1))
+
+
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+
 (setq diredp-toggle-find-file-reuse-dir 1)
 (setq diredp-hide-details-toggled -1)
 
@@ -20,6 +132,32 @@
 
 (require 'cl)
 (setq tls-checktrust t)
+
+(setq line-move-visual t)
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+(defadvice kill-buffer (around kill-buffer-around-advice activate)
+  (let ((buffer-to-kill (ad-get-arg 0)))
+    (if (equal buffer-to-kill "*scratch*")
+        (bury-buffer)
+      ad-do-it)))
+
+(global-auto-revert-mode 1)
+
+;; Lame, server has bad autoloads :(
+(require 'server nil t)
+(use-package server
+  :ensure server
+  :if window-system
+  :init
+  (when (not (server-running-p server-name))
+    (server-start)))
+
+(use-package helm-flx
+  :ensure helm-flx
+  :init (helm-flx-mode +1))
 
 (setq python (or (executable-find "py.exe")
                  (executable-find "python")))
@@ -140,8 +278,14 @@
     ))
 
 (use-package smooth-scrolling
+  :defer t
   :ensure t
-  :config (setq smooth-scroll-margin 2)
+  :config (progn
+            (setq smooth-scroll-margin 3
+                  scroll-margin 3
+                  scroll-conservatively 101
+                  scroll-preserve-screen-position t
+                  auto-window-vscroll nil))
   :init (smooth-scrolling-mode 1))
 
 
@@ -162,6 +306,80 @@
 
 (setq-default indent-tabs-mode nil)
 
+(use-package golden-ratio
+  :ensure golden-ratio
+  :diminish golden-ratio-mode
+  :defer t
+  :config
+  (defun my/helm-alive-p ()
+    (if (boundp 'helm-alive-p)
+        (symbol-value 'helm-alive-p)))
+  (add-to-list 'golden-ratio-exclude-modes #'messages-buffer-mode)
+  (add-to-list 'golden-ratio-exclude-modes #'fundamental-mode)
+  ;; Inhibit helm
+  (add-to-list 'golden-ratio-inhibit-functions #'my/helm-alive-p))
+
+(use-package git-gutter
+  :ensure git-gutter
+  :defer t
+  :bind (("C-x =" . git-gutter:popup-hunk)
+         ("C-c P" . git-gutter:previous-hunk)
+         ("C-c N" . git-gutter:next-hunk)
+         ("C-x p" . git-gutter:previous-hunk)
+         ("C-x n" . git-gutter:next-hunk)
+         ("C-c G" . git-gutter:popup-hunk))
+  :diminish ""
+  :init
+  (add-hook 'prog-mode-hook 'git-gutter-mode)
+  (add-hook 'org-mode-hook 'git-gutter-mode))
+
+(defun beautify-json ()
+  (interactive)
+  (let ((b (if mark-active (min (point) (mark)) (point-min)))
+        (e (if mark-active (max (point) (mark)) (point-max))))
+    (shell-command-on-region b e
+                             "python -mjson.tool" (current-buffer) t)))
+
+(defun untabify-buffer ()
+  (interactive)
+  (untabify (point-min) (point-max)))
+
+(defun indent-buffer ()
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
+(defvar bad-cleanup-modes '(python-mode yaml-mode)
+  "List of modes where `cleanup-buffer' should not be used")
+
+(defun cleanup-buffer ()
+  "Perform a bunch of operations on the whitespace content of a
+buffer. If the buffer is one of the `bad-cleanup-modes' then no
+re-indenting and un-tabification is done."
+  (interactive)
+  (unless (member major-mode bad-cleanup-modes)
+    (progn
+      (indent-buffer)
+      (untabify-buffer)))
+  (delete-trailing-whitespace))
+
+;; Perform general cleanup.
+(global-set-key (kbd "C-c n") #'cleanup-buffer)
+
+(defun transpose-buffers (arg)
+  "Transpose the buffers shown in two windows."
+  (interactive "p")
+  (let ((selector (if (>= arg 0) 'next-window 'previous-window)))
+    (while (/= arg 0)
+      (let ((this-win (window-buffer))
+            (next-win (window-buffer (funcall selector))))
+        (set-window-buffer (selected-window) next-win)
+        (set-window-buffer (funcall selector) this-win)
+        (select-window (funcall selector)))
+      (setq arg (if (plusp arg) (1- arg) (1+ arg))))))
+
+(global-set-key (kbd "C-x 4 t") 'transpose-buffers)
+
+
 (require 'ox-confluence)
 (require 'restclient)
 
@@ -174,13 +392,31 @@
 
 (require 'whitespace)
 (setq whitespace-line-column 120) ;; limit line length
-(setq whitespace-style '(face lines-tail))
+;; (setq whitespace-style '(face lines-tail))
+
+(setq whitespace-style '(tabs newline space-mark
+                              tab-mark newline-mark
+                              face lines-tail))
+
+(setq whitespace-display-mappings
+      ;; all numbers are Unicode codepoint in decimal. e.g. (insert-char 182 1)
+      ;; 32 SPACE, 183 MIDDLE DOT
+      '((space-mark nil)
+        ;; 10 LINE FEED
+        ;;(newline-mark 10 [172 10])
+        (newline-mark nil)
+        ;; 9 TAB, MIDDLE DOT
+        (tab-mark 9 [183 9] [92 9])))
+
+(setq-default show-trailing-whitespace t)
+
+(add-hook 'prog-mode-hook #'hl-line-mode)
 
 (add-hook 'prog-mode-hook 'whitespace-mode)
 (add-hook 'org-mode-hook 'whitespace-mode)
 
 (autoload 'markdown-mode "markdown-mode"
-   "Major mode for editing Markdown files" t)
+  "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
@@ -252,13 +488,180 @@ FORCE-OTHER-WINDOW is ignored."
 (setq display-buffer-function 'my-display-buffer)
 
 (set-face-attribute 'default nil
-                    :family "Source Code Pro for Powerline" :height 145 :weight 'regular)
+                    ;; :family "Source Code Pro for Powerline" :height 145 :weight 'regular)
+                    ;; :family "Anonymous Pro for Powerline" :height 175 :weight 'regular)
+                    :family "Fira Code" :height 175 :weight 'medium)
+                    ;; :family "SF UI Text" :height 175 :weight 'medium)
 ;; (use-package relative-line-numbers
 ;;              :ensure relative-line-numbers
 ;;              :config
 ;;              (progn
 ;;                (global-relative-line-numbers-mode)
 ;;                ))
+
+;; (when (window-system)
+;;   (set-default-font "Fira Code"))
+(let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
+               (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
+               (36 . ".\\(?:>\\)")
+               (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
+               (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
+               (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
+               (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
+               (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
+               (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
+               (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
+               (48 . ".\\(?:x[a-zA-Z]\\)")
+               (58 . ".\\(?:::\\|[:=]\\)")
+               (59 . ".\\(?:;;\\|;\\)")
+               (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
+               (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
+               (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
+               (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
+               (91 . ".\\(?:]\\)")
+               (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
+               (94 . ".\\(?:=\\)")
+               (119 . ".\\(?:ww\\)")
+               (123 . ".\\(?:-\\)")
+               (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
+               (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)"))))
+
+  (dolist (char-regexp alist)
+    (set-char-table-range composition-function-table (car char-regexp)
+                          `([,(cdr char-regexp) 0 font-shape-gstring]))))
+
+;;; Fira code
+;; This works when using emacs --daemon + emacsclient
+;; (add-hook 'after-make-frame-functions (lambda (frame) (set-fontset-font t '(#Xe100 . #Xe16f) "Fira Code Symbol")))
+;; This works when using emacs without server/client
+;; (set-fontset-font t '(#Xe100 . #Xe16f) "Fira Code Symbol")
+;; I haven't found one statement that makes both of the above situations work, so I use both for now
+
+(defconst fira-code-font-lock-keywords-alist
+  (mapcar (lambda (regex-char-pair)
+            `(,(car regex-char-pair)
+              (0 (prog1 ()
+                   (compose-region (match-beginning 1)
+                                   (match-end 1)
+                                   ;; The first argument to concat is a string containing a literal tab
+                                   ,(concat "   " (list (decode-char 'ucs (cadr regex-char-pair)))))))))
+          '(("\\(www\\)"                   #Xe100)
+            ("[^/]\\(\\*\\*\\)[^/]"        #Xe101)
+            ("\\(\\*\\*\\*\\)"             #Xe102)
+            ("\\(\\*\\*/\\)"               #Xe103)
+            ("\\(\\*>\\)"                  #Xe104)
+            ("[^*]\\(\\*/\\)"              #Xe105)
+            ("\\(\\\\\\\\\\)"              #Xe106)
+            ("\\(\\\\\\\\\\\\\\)"          #Xe107)
+            ("\\({-\\)"                    #Xe108)
+            ("\\(\\[\\]\\)"                #Xe109)
+            ("\\(::\\)"                    #Xe10a)
+            ("\\(:::\\)"                   #Xe10b)
+            ("[^=]\\(:=\\)"                #Xe10c)
+            ("\\(!!\\)"                    #Xe10d)
+            ("\\(!=\\)"                    #Xe10e)
+            ("\\(!==\\)"                   #Xe10f)
+            ("\\(-}\\)"                    #Xe110)
+            ("\\(--\\)"                    #Xe111)
+            ("\\(---\\)"                   #Xe112)
+            ("\\(-->\\)"                   #Xe113)
+            ("[^-]\\(->\\)"                #Xe114)
+            ("\\(->>\\)"                   #Xe115)
+            ("\\(-<\\)"                    #Xe116)
+            ("\\(-<<\\)"                   #Xe117)
+            ("\\(-~\\)"                    #Xe118)
+            ("\\(#{\\)"                    #Xe119)
+            ("\\(#\\[\\)"                  #Xe11a)
+            ("\\(##\\)"                    #Xe11b)
+            ("\\(###\\)"                   #Xe11c)
+            ("\\(####\\)"                  #Xe11d)
+            ("\\(#(\\)"                    #Xe11e)
+            ("\\(#\\?\\)"                  #Xe11f)
+            ("\\(#_\\)"                    #Xe120)
+            ("\\(#_(\\)"                   #Xe121)
+            ("\\(\\.-\\)"                  #Xe122)
+            ("\\(\\.=\\)"                  #Xe123)
+            ("\\(\\.\\.\\)"                #Xe124)
+            ("\\(\\.\\.<\\)"               #Xe125)
+            ("\\(\\.\\.\\.\\)"             #Xe126)
+            ("\\(\\?=\\)"                  #Xe127)
+            ("\\(\\?\\?\\)"                #Xe128)
+            ("\\(;;\\)"                    #Xe129)
+            ("\\(/\\*\\)"                  #Xe12a)
+            ("\\(/\\*\\*\\)"               #Xe12b)
+            ("\\(/=\\)"                    #Xe12c)
+            ("\\(/==\\)"                   #Xe12d)
+            ("\\(/>\\)"                    #Xe12e)
+            ("\\(//\\)"                    #Xe12f)
+            ("\\(///\\)"                   #Xe130)
+            ("\\(&&\\)"                    #Xe131)
+            ("\\(||\\)"                    #Xe132)
+            ("\\(||=\\)"                   #Xe133)
+            ("[^|]\\(|=\\)"                #Xe134)
+            ("\\(|>\\)"                    #Xe135)
+            ("\\(\\^=\\)"                  #Xe136)
+            ("\\(\\$>\\)"                  #Xe137)
+            ("\\(\\+\\+\\)"                #Xe138)
+            ("\\(\\+\\+\\+\\)"             #Xe139)
+            ("\\(\\+>\\)"                  #Xe13a)
+            ("\\(=:=\\)"                   #Xe13b)
+            ("[^!/]\\(==\\)[^>]"           #Xe13c)
+            ("\\(===\\)"                   #Xe13d)
+            ("\\(==>\\)"                   #Xe13e)
+            ("[^=]\\(=>\\)"                #Xe13f)
+            ("\\(=>>\\)"                   #Xe140)
+            ("\\(<=\\)"                    #Xe141)
+            ("\\(=<<\\)"                   #Xe142)
+            ("\\(=/=\\)"                   #Xe143)
+            ("\\(>-\\)"                    #Xe144)
+            ("\\(>=\\)"                    #Xe145)
+            ("\\(>=>\\)"                   #Xe146)
+            ("[^-=]\\(>>\\)"               #Xe147)
+            ("\\(>>-\\)"                   #Xe148)
+            ("\\(>>=\\)"                   #Xe149)
+            ("\\(>>>\\)"                   #Xe14a)
+            ("\\(<\\*\\)"                  #Xe14b)
+            ("\\(<\\*>\\)"                 #Xe14c)
+            ("\\(<|\\)"                    #Xe14d)
+            ("\\(<|>\\)"                   #Xe14e)
+            ("\\(<\\$\\)"                  #Xe14f)
+            ("\\(<\\$>\\)"                 #Xe150)
+            ("\\(<!--\\)"                  #Xe151)
+            ("\\(<-\\)"                    #Xe152)
+            ("\\(<--\\)"                   #Xe153)
+            ("\\(<->\\)"                   #Xe154)
+            ("\\(<\\+\\)"                  #Xe155)
+            ("\\(<\\+>\\)"                 #Xe156)
+            ("\\(<=\\)"                    #Xe157)
+            ("\\(<==\\)"                   #Xe158)
+            ("\\(<=>\\)"                   #Xe159)
+            ("\\(<=<\\)"                   #Xe15a)
+            ("\\(<>\\)"                    #Xe15b)
+            ("[^-=]\\(<<\\)"               #Xe15c)
+            ("\\(<<-\\)"                   #Xe15d)
+            ("\\(<<=\\)"                   #Xe15e)
+            ("\\(<<<\\)"                   #Xe15f)
+            ("\\(<~\\)"                    #Xe160)
+            ("\\(<~~\\)"                   #Xe161)
+            ("\\(</\\)"                    #Xe162)
+            ("\\(</>\\)"                   #Xe163)
+            ("\\(~@\\)"                    #Xe164)
+            ("\\(~-\\)"                    #Xe165)
+            ("\\(~=\\)"                    #Xe166)
+            ("\\(~>\\)"                    #Xe167)
+            ("[^<]\\(~~\\)"                #Xe168)
+            ("\\(~~>\\)"                   #Xe169)
+            ("\\(%%\\)"                    #Xe16a)
+           ;; ("\\(x\\)"                   #Xe16b) This ended up being hard to do properly so i'm leaving it out.
+            ("[^:=]\\(:\\)[^:=]"           #Xe16c)
+            ("[^\\+<>]\\(\\+\\)[^\\+<>]"   #Xe16d)
+            ("[^\\*/<>]\\(\\*\\)[^\\*/<>]" #Xe16f))))
+
+(defun add-fira-code-symbol-keywords ()
+  (font-lock-add-keywords nil fira-code-font-lock-keywords-alist))
+
+;; (add-hook 'prog-mode-hook
+;;           #'add-fira-code-symbol-keywords)
 
 (use-package relative-line-numbers
   :ensure relative-line-numbers

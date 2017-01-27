@@ -15,6 +15,8 @@
     (setq prettier-width-mode 'fill)
     ;; (add-hook 'js2-mode-hook (lambda () (add-hook 'before-save-hook 'prettier-before-save)))
     ;; (add-hook 'js-mode-hook (lambda () (add-hook 'before-save-hook 'prettier-before-save)))
+    (add-hook 'js2-mode-hook (lambda () (setq js2-basic-offset 2)))
+    (setq-default js-indent-level 2)
     ))
 
 (use-package jade

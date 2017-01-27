@@ -32,12 +32,13 @@
       "u" 'new-txt-document
       "ww" 'open-todo-list
       "cc" 'org-capture
+      "hh" 'helm-projectile-switch-project
       )
 
     (add-hook 'c++-mode-hook
-	      (lambda()
-		(evil-leader/set-key
-		  "s" 'ff-find-other-file)))
+              (lambda()
+                (evil-leader/set-key
+                  "s" 'ff-find-other-file)))
     ))
 
 ;; Here's what we've all been waiting for.
