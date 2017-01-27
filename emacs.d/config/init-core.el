@@ -17,7 +17,7 @@
 
 (defun my/dired-mode-hook ()
   ""
-  (toggle-truncate-lines 1))
+n  (toggle-truncate-lines 1))
 
 (use-package dired
   :bind ("C-x C-j" . dired-jump)
@@ -425,7 +425,7 @@ re-indenting and un-tabification is done."
 ;; (setq split-height-threshold nil)
 ;; (setq split-width-threshold most-positive-fixnum)
 
-(defun casey-never-split-a-window
+(defun casey-never-split-a-window ()
     "Never, ever split a window.  Why would anyone EVER want you to do that??"
     nil)
 (setq split-window-preferred-function 'casey-never-split-a-window)
@@ -491,7 +491,7 @@ FORCE-OTHER-WINDOW is ignored."
                     ;; :family "Source Code Pro for Powerline" :height 145 :weight 'regular)
                     ;; :family "Anonymous Pro for Powerline" :height 175 :weight 'regular)
                     :family "Fira Code" :height 175 :weight 'medium)
-                    ;; :family "SF UI Text" :height 175 :weight 'medium)
+;; :family "SF UI Text" :height 175 :weight 'medium)
 ;; (use-package relative-line-numbers
 ;;              :ensure relative-line-numbers
 ;;              :config
