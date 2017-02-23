@@ -10,12 +10,12 @@
     (setq projectile-globally-ignored-directories (append '("node_modules" ".svn" ".git") projectile-globally-ignored-directories))
     (projectile-global-mode)
 
-    (use-package projectile-ripgrep
-      :ensure projectile-ripgrep
-      :config
-      (progn
-        ))
-    ))
+    ;; (use-package projectile-ripgrep
+    ;;   :ensure projectile-ripgrep
+    ;;   :config
+    ;;   (progn
+    ;;     ))
+    ;; ))
 
 (use-package perspective
   :ensure perspective

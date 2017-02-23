@@ -33,6 +33,7 @@
       "ww" 'open-todo-list
       "cc" 'org-capture
       "hh" 'helm-projectile-switch-project
+      "w" 'toggle-word-wrap
       )
 
     (add-hook 'c++-mode-hook
@@ -66,6 +67,7 @@
     (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
     (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
     (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+    (define-key evil-normal-state-map (kbd "C-L") 'other-frame)
     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
     (define-key evil-normal-state-map (kbd "C-e") 'emmet-expand-line)
     (define-key evil-insert-state-map (kbd "C-e") 'emmet-expand-line)
@@ -85,11 +87,11 @@
 
     (defun my-evil-terminal-cursor-change ()
       (when (string= (getenv "TERM_PROGRAM") "iTerm.app")
-	(add-hook 'evil-insert-state-entry-hook (lambda () (my-send-string-to-terminal "\e]50;CursorShape=1\x7")))
-	(add-hook 'evil-insert-state-exit-hook  (lambda () (my-send-string-to-terminal "\e]50;CursorShape=0\x7"))))
+        (add-hook 'evil-insert-state-entry-hook (lambda () (my-send-string-to-terminal "\e]50;CursorShape=1\x7")))
+        (add-hook 'evil-insert-state-exit-hook  (lambda () (my-send-string-to-terminal "\e]50;CursorShape=0\x7"))))
       (when (and (getenv "TMUX") (string= (getenv "TERM_PROGRAM") "iTerm.app"))
-	(add-hook 'evil-insert-state-entry-hook (lambda () (my-send-string-to-terminal "\ePtmux;\e\e]50;CursorShape=1\x7\e\\")))
-	(add-hook 'evil-insert-state-exit-hook  (lambda () (my-send-string-to-terminal "\ePtmux;\e\e]50;CursorShape=0\x7\e\\")))))
+        (add-hook 'evil-insert-state-entry-hook (lambda () (my-send-string-to-terminal "\ePtmux;\e\e]50;CursorShape=1\x7\e\\")))
+        (add-hook 'evil-insert-state-exit-hook  (lambda () (my-send-string-to-terminal "\ePtmux;\e\e]50;CursorShape=0\x7\e\\")))))
 
     (add-hook 'after-make-frame-functions (lambda (frame) (my-evil-terminal-cursor-change)))
     (my-evil-terminal-cursor-change)
@@ -115,19 +117,19 @@
       :ensure evil-args
       :config
       (progn
-	;; bind evil-args text objects
-	(define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
-	(define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
+        ;; bind evil-args text objects
+        (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
+        (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
 
-	;; bind evil-forward/backward-args
-	(define-key evil-normal-state-map "L" 'evil-forward-arg)
-	(define-key evil-normal-state-map "H" 'evil-backward-arg)
-	(define-key evil-motion-state-map "L" 'evil-forward-arg)
-	(define-key evil-motion-state-map "H" 'evil-backward-arg)
+        ;; bind evil-forward/backward-args
+        (define-key evil-normal-state-map "L" 'evil-forward-arg)
+        (define-key evil-normal-state-map "H" 'evil-backward-arg)
+        (define-key evil-motion-state-map "L" 'evil-forward-arg)
+        (define-key evil-motion-state-map "H" 'evil-backward-arg)
 
-	;; bind evil-jump-out-args
-	(define-key evil-normal-state-map "K" 'evil-jump-out-args)
-	))
+        ;; bind evil-jump-out-args
+        (define-key evil-normal-state-map "K" 'evil-jump-out-args)
+        ))
 
     ;; (use-package evil-org
     ;;   :init (add-hook 'org-mode-hook 'evil-org-mode))
@@ -141,6 +143,7 @@
     (setq key-chord-two-keys-delay 0.5)
     (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
     (key-chord-define evil-insert-state-map "ii" 'evil-normal-state)
+    (define-key evil-normal-state-map (kbd "ww") 'other-frame)
     (key-chord-mode 1)
     ))
 

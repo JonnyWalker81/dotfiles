@@ -13,6 +13,7 @@
 (require 'dired+)
 
 (require 'fic-mode)
+(require 'helm-rg)
 (add-hook 'prog-mode-hook 'fic-mode)
 
 (defun my/dired-mode-hook ()
@@ -251,11 +252,18 @@ file to write to."
     
     ))
 
-(use-package ripgrep
-  :ensure ripgrep
-  :config
-  (progn
-    ))
+;; (use-package ripgrep
+;;   :ensure ripgrep
+;;   :config
+;;   (progn
+;;     ))
+
+;; (use-package projectile-ripgrep
+;;   :ensure projectile-ripgrep
+;;   :config
+;;   (progn
+
+;;     ))
 ;; (use-package smooth-scrolling
 ;;   :ensure smooth-scrolling
 ;;   :config
@@ -319,19 +327,19 @@ file to write to."
   ;; Inhibit helm
   (add-to-list 'golden-ratio-inhibit-functions #'my/helm-alive-p))
 
-(use-package git-gutter
-  :ensure git-gutter
-  :defer t
-  :bind (("C-x =" . git-gutter:popup-hunk)
-         ("C-c P" . git-gutter:previous-hunk)
-         ("C-c N" . git-gutter:next-hunk)
-         ("C-x p" . git-gutter:previous-hunk)
-         ("C-x n" . git-gutter:next-hunk)
-         ("C-c G" . git-gutter:popup-hunk))
-  :diminish ""
-  :init
-  (add-hook 'prog-mode-hook 'git-gutter-mode)
-  (add-hook 'org-mode-hook 'git-gutter-mode))
+;; (use-package git-gutter
+;;   :ensure git-gutter
+;;   :defer t
+;;   :bind (("C-x =" . git-gutter:popup-hunk)
+;;          ("C-c P" . git-gutter:previous-hunk)
+;;          ("C-c N" . git-gutter:next-hunk)
+;;          ("C-x p" . git-gutter:previous-hunk)
+;;          ("C-x n" . git-gutter:next-hunk)
+;;          ("C-c G" . git-gutter:popup-hunk))
+;;   :diminish ""
+;;   :init
+;;   (add-hook 'prog-mode-hook 'git-gutter-mode)
+;;   (add-hook 'org-mode-hook 'git-gutter-mode))
 
 (defun beautify-json ()
   (interactive)
@@ -394,21 +402,35 @@ re-indenting and un-tabification is done."
 (setq whitespace-line-column 120) ;; limit line length
 ;; (setq whitespace-style '(face lines-tail))
 
-(setq whitespace-style '(tabs newline space-mark
-                              tab-mark newline-mark
-                              face lines-tail))
+;; (setq whitespace-style '(tabs newline space-mark
+;;                               tab-mark newline-mark
+;;                               face lines-tail))
 
-(setq whitespace-display-mappings
-      ;; all numbers are Unicode codepoint in decimal. e.g. (insert-char 182 1)
-      ;; 32 SPACE, 183 MIDDLE DOT
-      '((space-mark nil)
-        ;; 10 LINE FEED
-        ;;(newline-mark 10 [172 10])
-        (newline-mark nil)
-        ;; 9 TAB, MIDDLE DOT
-        (tab-mark 9 [183 9] [92 9])))
+(progn
+  ;; Make whitespace-mode with very basic background coloring for whitespaces.
+  ;; http://ergoemacs.org/emacs/whitespace-mode.html
+  (setq whitespace-style (quote (face spaces tabs newline space-mark tab-mark newline-mark)))
 
-(setq-default show-trailing-whitespace t)
+  ;; Make whitespace-mode and whitespace-newline-mode use “¶” for end of line char and “▷” for tab.
+  (setq whitespace-display-mappings
+        ;; all numbers are unicode codepoint in decimal. e.g. (insert-char 182 1)
+        '(
+          (space-mark 32 [183] [46]) ; SPACE 32 「 」, 183 MIDDLE DOT 「·」, 46 FULL STOP 「.」
+          (newline-mark 10 [182 10]) ; LINE FEED,
+          (tab-mark 9 [9655 9] [92 9])))) ; tab
+
+
+;; (setq whitespace-display-mappings
+;;       ;; all numbers are Unicode codepoint in decimal. e.g. (insert-char 182 1)
+;;       ;; 32 SPACE, 183 MIDDLE DOT
+;;       '((space-mark nil)
+;;         ;; 10 LINE FEED
+;;         ;;(newline-mark 10 [172 10])
+;;         (newline-mark nil)
+;;         ;; 9 TAB, MIDDLE DOT
+;;         (tab-mark 9 [183 9] [92 9])))
+
+(setq-default show-trailing-whitespace nil)
 
 (add-hook 'prog-mode-hook #'hl-line-mode)
 
@@ -764,6 +786,7 @@ FORCE-OTHER-WINDOW is ignored."
   :config
   (progn
     (ivy-mode 1)
+    (setq counsel-git-grep-cmd "rg -j4 -i --no-heading --line-number -e %s .")
     (setq ivy-use-virtual-buffers t)
     (setq ivy-display-style nil)
     (define-key read-expression-map (kbd "C-r") #'counsel-expression-history)
