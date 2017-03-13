@@ -6,7 +6,7 @@
   
   (evil-leader/set-key
     "b" 'helm-mini
-    "s" 'helm-do-ag-project-root
+    "s" 'counsel-git-grep
     "ff" 'helm-find-files)
 
   (progn
@@ -16,7 +16,7 @@
       :config
       (progn))
 
-    (setq helm-grep-ag-command "rg --smart-case --no-heading --line-number %s %s %s")
+    ;; (setq helm-grep-ag-command "rg --smart-case --no-heading --line-number %s %s %s")
     (use-package helm-swoop
         :ensure helm-swoop
         ;; :bind (("M-i" . helm-swoop
@@ -40,8 +40,10 @@
       :ensure helm-ag
       :config
       (progn
-        (setq helm-ag-insert-at-point nil)
-        (setq helm-ag-base-command "rg --smart-case --no-heading --line-number --vimgrep")))))
+        (setq helm-ag-insert-at-point nil)))))
+        ;; (setq helm-ag-base-command "rg --smart-case --no-heading --line-number --vimgrep")
+        
+        
 
         
 
