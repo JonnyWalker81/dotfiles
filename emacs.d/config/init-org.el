@@ -21,6 +21,19 @@
 
     ))
 
+(use-package org-page
+  :ensure org-page
+  :config
+  (progn
+
+    (setq op/repository-directory "~/Repositories/JonnyWalker81.github.io")
+    (setq op/site-domain "http://JonnyWalker81.github.io")
+    (setq op/personal-github-link "https://github.com/JonnyWalker81")
+    (setq op/site-main-title "Blog")
+    (setq op/site-sub-title "Random Adventures in Coding")
+    ;; (setq op/personal-disqus-shortname "theonetrueblog")
+    ))
+
 (setq org-hide-leading-stars t)
 (setq org-ellipsis "⤵")
 (setq org-src-fontify-natively t)
