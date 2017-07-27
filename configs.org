@@ -151,14 +151,20 @@
 
     alias emacs="/usr/local/Cellar/emacs/HEAD-5af51bd/Emacs.app/Contents/MacOS/Emacs -nw"
 
+    export GOPATH="$HOME/go"
+
     export PATH="/usr/local/opt/curl/bin:$PATH"
 
     source $HOME/.cargo/env
     # OPAM configuration
     . $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
+    export PATH="$PATH:$GOPATH/bin"
+
 
     source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    
+    eval "$(direnv hook zsh)"
 
   #+END_SRC
 

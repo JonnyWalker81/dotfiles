@@ -36,6 +36,8 @@
                 ;; If nil, you can slightly boost invoke speed in exchange for text color
                 helm-swoop-speed-or-color nil))
 
+    (require 'helm-rg)
+
     (use-package helm-ag
       :ensure helm-ag
       :config

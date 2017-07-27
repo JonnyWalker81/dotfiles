@@ -27,7 +27,7 @@
     (sp-local-pair 'c-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
     (sp-local-pair 'csharp-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
     (sp-local-pair 'swift-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
-    (sp-local-pair 'kotlin-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
+    (sp-local-pair 'kotlin-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp-kotlin "RET")))
     ;; (sp-local-pair 'kotlin-mode "{" nil :post-handlers nil)
     (sp-local-pair 'javascript-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
     (sp-local-pair 'java-mode "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET")))
@@ -42,6 +42,15 @@
       (forward-line -1)
       (indent-according-to-mode))
 
+    (defun my-create-newline-and-enter-sexp-kotlin (&rest _ignored)
+      "Open a new brace or bracket expression, with relevant newlines and indent. "
+      (message "kotlin  begin")
+      (newline)
+      (indent-according-to-mode)
+      (forward-line -1)
+      (indent-according-to-mode)
+      (message "kotlin  end")
+      )
     ))
 
 (provide 'init-smartparens)

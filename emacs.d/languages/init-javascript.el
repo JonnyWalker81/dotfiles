@@ -19,11 +19,11 @@
     (setq-default js-indent-level 2)
     ))
 
-(use-package jade
-  :ensure jade
-  :config
-  (progn
-    (add-hook 'js2-mode-hook #'jade-interaction-mode)))
+;; (use-package jade
+;;   :ensure jade
+;;   :config
+;;   (progn
+;;     (add-hook 'js2-mode-hook #'jade-interaction-mode)))
 
 (use-package web-beautify
   :ensure web-beautify

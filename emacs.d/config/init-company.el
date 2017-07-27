@@ -26,18 +26,18 @@
                                   (company-mode)
                                   (go-mode-setup)))
         ))
-    ;; (use-package company-sourcekit
-    ;;   :ensure company-sourcekit
-    ;;   :init (add-to-list 'company-backends 'company-sourcekit)
-    ;;   :config
-    ;;   (progn
-    ;;     ;; (setq sourcekit-verbose nil)
-    ;;     ;; (setq company-sourcekit-verbose nil)
-    ;;     ;; (defadvice sourcekit-project (after find-git-rel-project activate)
-    ;;     ;;   (message "advice...")
-    ;;     ;;   (setq ad-return-value "/Users/jrothberg/Repositories/Mako/mako.xcodeproj")
-    ;;     ;;   )
-    ;;     ))
+    (use-package company-sourcekit
+      :ensure company-sourcekit
+      :init (add-to-list 'company-backends 'company-sourcekit)
+      :config
+      (progn
+        ;; (setq sourcekit-verbose nil)
+        ;; (setq company-sourcekit-verbose nil)
+        ;; (defadvice sourcekit-project (after find-git-rel-project activate)
+        ;;   (message "advice...")
+        ;;   (setq ad-return-value "/Users/jrothberg/Repositories/Mako/mako.xcodeproj")
+        ;;   )
+        ))
 
     (use-package company-ghc
       :ensure company-ghc

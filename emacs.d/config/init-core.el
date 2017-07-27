@@ -9,16 +9,25 @@
 
 (setenv "RLS_ROOT" "~/Repositories/rls")
 
-(require 'dired-x)
-(require 'dired+)
+;; (require 'dired-x)
+;; (require 'dired+)
 
 (require 'fic-mode)
-(require 'helm-rg)
 (add-hook 'prog-mode-hook 'fic-mode)
+
+;; (use-package aggressive-indent
+;;   :ensure aggressive-indent
+;;   :config
+;;   (progn
+
+;;     (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+;;     (add-hook 'css-mode-hook #'aggressive-indent-mode)
+;;     (add-hook 'kotlin-mode #'aggressive-indent-mode)
+;;     ))
 
 (defun my/dired-mode-hook ()
   ""
-n  (toggle-truncate-lines 1))
+  (toggle-truncate-lines 1))
 
 (use-package dired
   :bind ("C-x C-j" . dired-jump)
@@ -121,6 +130,13 @@ file to write to."
        (warn "recentf mode: %s" (error-message-string error)))))
   (recentf-mode 1))
 
+(use-package shackle
+  :ensure shackle
+  :config
+  (progn
+    (setq helm-display-function 'pop-to-buffer) ; make helm play nice
+    (setq shackle-rules '(("\\`\\*helm.*?\\*\\'" :regexp t :align t :size 0.4)))
+    ))
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
@@ -685,19 +701,38 @@ FORCE-OTHER-WINDOW is ignored."
 ;; (add-hook 'prog-mode-hook
 ;;           #'add-fira-code-symbol-keywords)
 
-(use-package relative-line-numbers
-  :ensure relative-line-numbers
-  :init
-  (defun abs-rel-numbers (offset)
-    (if (= offset 0)
-        (format "%4d " (line-number-at-pos))
-      (format "%4d " (abs offset))))
-  :config
-  (progn
-    (global-relative-line-numbers-mode)
-    ))
+;; (use-package relative-line-numbers
+;;   :ensure relative-line-numbers
+;;   :init
+;;   (defun abs-rel-numbers (offset)
+;;     (if (= offset 0)
+;;         (format "%4d " (line-number-at-pos))
+;;       (format "%4d " (abs offset))))
+;;   :config
+;;   (progn
+;;     (global-relative-line-numbers-mode)
+;;     ))
 
-  (setq relative-line-numbers-format #'abs-rel-numbers)
+(require 'relative-linum)
+    (global-linum-mode t)
+;; (use-package relative-linum
+;;   :ensure relative-linum
+;;   :config
+;;   (progn
+;;     (global-linum-mode t)
+;;     ))
+
+;; (setq relative-line-numbers-format #'abs-rel-numbers)
+
+;; (use-package nlinum-relative
+;;   :ensure nlinum-relative
+;;   :config
+;;   ;; something else you want
+;;   ;; (nlinum-relative-setup-evil)
+;;   (global-nlinum-relative-mode 1)
+;;   ;; (add-hook 'prog-mode-hook 'nlinum-relative-mode)
+;;   (setq nlinum-relative-redisplay-delay 0)      ;; delay
+;;   )
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 ; (toggle-full-screen)

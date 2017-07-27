@@ -2,14 +2,14 @@
 ;; Evil mode config
 
 ;; In order to work properly, we need to load evil-leader-mode before we load
-					;g; evil-mode.
+                                        ;g; evil-mode.
 (use-package evil-leader
   :commands (evil-leader-mode global-evil-leader-mode)
   :ensure evil-leader
   :demand evil-leader
   :config
   (progn
-    (evil-leader/set-leader ",")
+    (evil-leader/set-leader "SPC")
     (global-evil-leader-mode t)
 
     (evil-leader/set-key
@@ -30,10 +30,12 @@
       "o" 'find-file
       "n" 'new-org-note
       "u" 'new-txt-document
-      "ww" 'open-todo-list
+      ;; "ww" 'open-todo-list
       "cc" 'org-capture
-      "hh" 'helm-projectile-switch-project
+      ;; "hh" 'helm-projectile-switch-project
       "w" 'toggle-word-wrap
+      "h" 'other-frame
+      "pp" 'helm-projectile-switch-project
       )
 
     (add-hook 'c++-mode-hook
@@ -96,8 +98,8 @@
     (add-hook 'after-make-frame-functions (lambda (frame) (my-evil-terminal-cursor-change)))
     (my-evil-terminal-cursor-change)
 
-    (evil-define-key 'normal dired-mode-map "h" 'dired-up-director)
-    (evil-define-key 'normal dired-mode-map "l" 'dired-find-alternate-file)
+    ;; (evil-define-key 'normal dired-mode-map "h" 'dired-up-director)
+    ;; (evil-define-key 'normal dired-mode-map "l" 'dired-find-alternate-file)
     (evil-define-key 'normal dired-mode-map "o" 'dired-sort-toggle-or-edit)
     (evil-define-key 'normal dired-mode-map "v" 'dired-toggle-marks)
     (evil-define-key 'normal dired-mode-map "m" 'dired-mark)
@@ -131,6 +133,28 @@
         (define-key evil-normal-state-map "K" 'evil-jump-out-args)
         ))
 
+    (use-package evil-snipe
+      :ensure evil-snipe
+      :config
+      (progn
+        (evil-snipe-mode 1)
+        ))
+
+
+    (use-package evil-mc
+      :ensure evil-mc
+      :config
+      (progn
+        (global-evil-mc-mode  1)
+        ))
+
+    (use-package evil-multiedit
+      :ensure evil-multiedit
+      :config
+      (progn
+        
+        ))
+
     ;; (use-package evil-org
     ;;   :init (add-hook 'org-mode-hook 'evil-org-mode))
     ))
@@ -141,9 +165,9 @@
   :config
   (progn
     (setq key-chord-two-keys-delay 0.5)
-    (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
-    (key-chord-define evil-insert-state-map "ii" 'evil-normal-state)
-    (define-key evil-normal-state-map (kbd "ww") 'other-frame)
+    ;; (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
+    ;; (key-chord-define evil-insert-state-map "ii" 'evil-normal-state)
+    ;; (define-key evil-normal-state-map (kbd "ww") 'other-frame)
     (key-chord-mode 1)
     ))
 
