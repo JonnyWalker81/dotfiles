@@ -1,0 +1,9 @@
+ls
+ls
+cd ..
+cd vortex/src/vortex/core/
+l
+touch solver.go
+l
+x
+exit

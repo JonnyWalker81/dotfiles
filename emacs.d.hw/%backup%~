@@ -1,0 +1,11 @@
+/*
+ * Copyright © 2002-2017 Bluebeam Software, Inc. All Rights Reserved.
+ * Creator: Jonathan Rothberg
+ */
+
+import Foundation
+
+protocol SettingsProvider {
+    func getString(key: String) -> String
+    func getInt(key: String) -> Int
+}
