@@ -1,4 +1,5 @@
 ;;; Code:
+(require 'ob-plantuml)
 
 ;; (setq org-latex-to-pdf-process '("/usr/local/texlive/2015basic/bin/universal-darwin/pdftex %f"))
 (use-package org-bullets
@@ -8,6 +9,16 @@
 
     ))
 
+(use-package org-plus-contrib
+  :ensure org-plus-contrib
+  :config
+  (progn
+    (use-package plantuml-mode
+      :ensure plantuml-mode
+      :config
+      (progn
+        ))
+    ))
 (add-hook 'org-mode-hook (lambda()
 			   (auto-fill-mode 1)
 			   (flyspell-mode 1)

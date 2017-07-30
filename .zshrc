@@ -5,7 +5,7 @@ export ZSH=~/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="powerline"
+ZSH_THEME="spaceship"
 
 
 # Uncomment the following line to use case-sensitive completion.
@@ -116,4 +116,8 @@ export RUST_SRC_PATH=~/.multirust/toolchains/nightly-x86_64-apple-darwin/src
 alias emacs="/usr/local/Cellar/emacs/HEAD/bin/emacs-25.1.50"
 
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH=$PATH:/Library/TeX/texbin
+export PATH=$PATH:/Library/TeX/texbin:~/Library/Haskell/bin
+
+eval "$(direnv hook zsh)"
+
+eval "$(direnv hook bash)"

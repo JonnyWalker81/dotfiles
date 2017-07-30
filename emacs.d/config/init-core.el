@@ -13,7 +13,6 @@
 (require 'dired+)
 
 (require 'fic-mode)
-(require 'helm-rg)
 (add-hook 'prog-mode-hook 'fic-mode)
 
 (defun my/dired-mode-hook ()
