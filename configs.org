@@ -159,11 +159,15 @@
     # OPAM configuration
     . $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
+    eval $(opam config env) 
     export PATH="$PATH:$GOPATH/bin"
 
 
     source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     
+    eval "$(direnv hook zsh)"
+
+    export PATH=$PATH:$HOME/Downloads/connectiq-sdk-mac-2.2.5/bin
     eval "$(direnv hook zsh)"
 
   #+END_SRC
