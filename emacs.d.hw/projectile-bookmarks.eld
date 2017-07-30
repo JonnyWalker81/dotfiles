@@ -1,0 +1,1 @@
+("~/Repositories/SparkSetup/" "~/Repositories/SparkSandbox/" "~/Repositories/PulseApp/" "~/Repositories/vortex/" "~/Repositories/go-sat/" "~/Repositories/minisat/" "~/Repositories/dotfiles/" "~/Repositories/Haskell-DPLL-SAT-Solver/" "~/Repositories/python-sat-solver/")
