@@ -35,7 +35,7 @@
     company
     flycheck
     swift-mode
-    (company-sourcekit :location (recipe :fetcher github :repo "nathankot/company-sourcekit" :files "company-sourcekit.el"))
+    ;; (company-sourcekit :location (recipe :fetcher github :repo "nathankot/company-sourcekit" :files "company-sourcekit.el"))
     )
   "The list of Lisp packages required by the custom-swift layer.
 
