@@ -8,3 +8,11 @@
   (insert " * Creator: Jonathan Rothberg\n")
   (insert " */\n")
   )
+
+(defun close-buffers-with-pattern (PATTERN)
+  "Close buffers with a certain pattern"
+  (interactive "sPattern:")
+  (loop for buffer in (buffer-list)
+        do (if (string-prefix-p PATTERN (buffer-name buffer))
+               (kill-buffer buffer))))
+  
