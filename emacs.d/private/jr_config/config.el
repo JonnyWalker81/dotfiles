@@ -16,3 +16,8 @@
         do (if (string-prefix-p PATTERN (buffer-name buffer))
                (kill-buffer buffer))))
   
+
+(defun close-request-buffers()
+  "Close *request* buffers"
+  (interactive)
+  (close-buffers-with-pattern " *request"))
