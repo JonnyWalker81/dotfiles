@@ -30,7 +30,10 @@
 ;;; Code:
 
 (defconst jr_config-packages
-  '()
+  '(
+    kotlin-mode
+    flycheck-kotlin
+    )
   "The list of Lisp packages required by the jr_config layer.
 
 Each entry is either:
@@ -58,5 +61,21 @@ Each entry is either:
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
+(defun jr_config/init-kotlin-mode ()
+  (message "init-kotlin-mode loading...")
+  (use-package kotlin-mode
+    :ensure kotlin-mode
+  )
+
+  (use-package gradle-mode
+    :ensure gradle-mode)
+  ;; (add-to-list 'auto-mode-alist '("\\.kt$" . kotlin-mode))
+  ;; (add-to-list 'auto-mode-alist '("\\.kts$" . kotlin-mode))
+  )
+
+(defun jr_config/init-flycheck-kotlin ())
+
+(defun jr_config/post-init-flycheck ()
+  (add-hook 'kotlin-mode-hook 'flycheck-mode))
 
 ;;; packages.el ends here
