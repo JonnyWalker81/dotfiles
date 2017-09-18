@@ -32,7 +32,9 @@
 (defconst jr_config-packages
   '(
     kotlin-mode
+    gradle-mode
     flycheck-kotlin
+    groovy-mode
     )
   "The list of Lisp packages required by the jr_config layer.
 
@@ -66,12 +68,30 @@ Each entry is either:
   (use-package kotlin-mode
     :ensure kotlin-mode
   )
-
-  (use-package gradle-mode
-    :ensure gradle-mode)
-  ;; (add-to-list 'auto-mode-alist '("\\.kt$" . kotlin-mode))
+    ;; (add-to-list 'auto-mode-alist '("\\.kt$" . kotlin-mode))
   ;; (add-to-list 'auto-mode-alist '("\\.kts$" . kotlin-mode))
   )
+
+(defun jr_config/init-gradle-mode ()
+  (message "init-gradle-mode loading...")
+  (use-package gradle-mode
+    :ensure gradle-mode
+    :config
+    (progn
+      ;;;###autoload
+      (add-to-list 'auto-mode-alist '("\\.gradle\\'" . gradle-mode) t)
+      (gradle-mode 1)))
+  )
+
+(defun jr_config/init-groovy-mode ()
+  (use-package groovy-mode
+    :defer t
+    :mode ("\\.groovy\\'" . groovy-mode)
+    :init
+    (progn
+      (add-to-list 'auto-mode-alist '("\\.gradle\\'" . groovy-mode) t)
+      (setq c-basic-offset 4)))
+)
 
 (defun jr_config/init-flycheck-kotlin ())
 
