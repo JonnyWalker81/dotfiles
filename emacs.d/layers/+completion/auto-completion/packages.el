@@ -16,7 +16,6 @@
         company
         (company-quickhelp :toggle auto-completion-enable-help-tooltip)
         company-statistics
-        company-sourcekit
         fuzzy
         (helm-company :toggle (configuration-layer/package-usedp 'helm))
         (helm-c-yasnippet :toggle (configuration-layer/package-usedp 'helm))
