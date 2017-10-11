@@ -1,1 +1,1 @@
-(spacemacs|defvar-company-backends swift-mode)
+;; (spacemacs|defvar-company-backends swift-mode)

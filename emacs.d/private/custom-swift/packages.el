@@ -35,7 +35,7 @@
     company
     flycheck
     swift-mode
-    ;; (company-sourcekit :location (recipe :fetcher github :repo "nathankot/company-sourcekit" :files "company-sourcekit.el"))
+    (company-sourcekit :location (recipe :fetcher github :repo "nathankot/company-sourcekit" :files "company-sourcekit.el"))
     )
   "The list of Lisp packages required by the custom-swift layer.
 
@@ -77,7 +77,17 @@ Each entry is either:
       :if (configuration-layer/layer-usedp `company)
       :defer t
       :init
-      (push `company-sourcekit company-backends-swift-mode))))
+
+      ))
+
+  (defun custom-swift/post-init-company ()
+    (spacemacs|add-company-backends
+      :backends company-sourcekit
+      :modes swift-mode
+      :variables company-swift-show-annotation t)
+    ;; (push `company-sourcekit company-backends-swift-mode)
+    )
+  )
 
 (defun custom-swift/post-init-flycheck()
   (spacemacs|use-package-add-hook flycheck-color-mode-line-error-face
