@@ -45,7 +45,7 @@ values."
      helm
      (auto-completion :variables
                       auto-completion-enable-sort-by-usage t
-                      spacemacs-default-company-backends '(company-files company-capf company-sourcekit))
+                      spacemacs-default-cjompany-backends '(company-files company-capf company-sourcekit))
      better-defaults
      emacs-lisp
      git
@@ -523,10 +523,14 @@ you should place your code here."
   (setenv "GOPATH" (expand-file-name (vc-git-root (pwd))))
   )
 
-(defun enable-smartparens (f)
+(defun enable-smartparens ()
   (message "enable-smartparens mode, maybe...")
   (smartparens-mode t)
   (smartparens-global-mode t)
+  )
+
+(defun enable-smartparens-functions (f)
+  (enable-smartparens)
   )
 
 (setq gofmt-command "goimports")
@@ -542,7 +546,7 @@ you should place your code here."
   (smartparens-global-mode t)
   )
 
-(add-hook 'after-load-functions 'enable-smartparens)
+(add-hook 'after-load-functions 'enable-smartparens-functions)
 
 )
 
