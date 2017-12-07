@@ -72,7 +72,8 @@ values."
      csharp
      ;; swift
      (elm :variables
-          elm-format-command "elm-format-0.18"
+          elm-format-on-save t
+          elj-format-command "elm-format"
           elm-sort-imports-on-save t)
      )
    ;; List of additional packages that will be installed without being
